@@ -2,6 +2,15 @@
 gems:
   - jemoji
   - jekyll-paginate
+  - octopress-image-tag
+  - octopress-codeblock
+  - jekyll-textile-converter
+  - jekyll-paginate
+  - octopress-quote-tag
+  - octopress-codefence
+  - octopress-solarized
+  - octopress-gist
+  - octopress-render-code
 
 # Site settings
 title: "Fun On Rails"
@@ -20,6 +29,7 @@ author_image: "/assets/images/author.jpg"
 
 url: http://funonrails.com
 baseurl: ""
+permalink: /:year/:month/:title
 
 highlighter: pygments # default python pygments have been replaced by pygments.rb
 
@@ -34,17 +44,15 @@ titlecase: false       # Converts page and post titles to titlecase
 twitter_handle: '@sandipransing'
 
 # Build settings
-markdown: kramdown
-gems: 
-  - octopress-image-tag
-  - octopress-codeblock
-  - jekyll-textile-converter
-  - jekyll-paginate
-  - octopress-quote-tag
-  - octopress-codefence
-  - octopress-solarized
-  - octopress-gist
-  - octopress-render-code
+#markdown: kramdown
+#kramdown: 
+#  parse_block_html: false
+markdown: rdiscount
+rdiscount:
+  extensions:
+    - autolink
+    - footnotes
+    - smart
 
 # Disqus Comments
 disqus_short_name: funonrails
