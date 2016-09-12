@@ -1,0 +1,59 @@
+# Build settings
+gems:
+  - jemoji
+  - jekyll-paginate
+
+# Site settings
+title: "Fun On Rails"
+description: > # this means to ignore newlines until "email:"
+  Journal of a Web Developer #ruby #rails #JS 
+
+email: sandip@funonrails.com
+#blog logo
+logo: "/assets/images/for_logo.png"
+# blog cover
+cover: ""
+
+name: 'Sandip Ransing'
+author: 'Sandip Ransing'
+author_image: "/assets/images/author.jpg"
+
+paginate:	5
+
+url: http://funonrails.com
+baseurl: ""
+#used to display twitter cards
+twitter_handle: '@sandipransing'
+
+#fill in disqus shortname to use disqus
+#disqus: disqus-shortname
+
+# social icons and sharing options
+social:
+  - icon:	twitter
+    url:	https://twitter.com/sandipransing
+    desc: Follow me on twitter
+    share_url: http://twitter.com/share
+    share_title: ?text=
+    share_link: "&amp;url="
+
+#  - icon:	facebook
+#    url:	https://facebook.com/???
+#    desc: Connect with me facebook
+#    share_url: https://www.facebook.com/sharer.php
+#    share_title: ?t=
+#    share_link: "&amp;u="
+
+  - icon:	github
+    url:	https://github.com/sandipransing
+    desc:	Fork me on github
+    share_url:
+    share_title:
+    share_link:
+
+#  - icon:	google-plus
+#    url:	https://google.com/???
+#    desc:	Add me on google+
+#    share_url:
+#    share_title:
+#    share_link:
