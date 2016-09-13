@@ -30,7 +30,7 @@ end
 ```
 <!-- more -->
 ## Generate Authentication token on your own (If devise version > 3.2)
-```ruby
+```
 class User < ActiveRecord::Base
 # ..code..
   devise :database_authenticatable,
