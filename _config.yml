@@ -45,20 +45,13 @@ twitter_handle: '@sandipransing'
 
 markdown: kramdown
 kramdown:
-  auto_ids:       true
-  footnote_nr:    1
-  entity_output:  as_char
-  toc_levels:     1..6
-  smart_quotes:   lsquo,rsquo,ldquo,rdquo
-  input:          GFM
-  hard_wrap:      false
-  footnote_nr:    1
+  input: GFM
 #markdown: rdiscount
-rdiscount:
-  extensions:
-    - autolink
-    - footnotes
-    - smart
+#rdiscount:
+#  extensions:
+#    - autolink
+#    - footnotes
+#    - smart
 
 # Disqus Comments
 disqus_short_name: funonrails
@@ -73,12 +66,12 @@ social:
     share_title: ?text=
     share_link: "&amp;url="
 
-#  - icon:	facebook
+  - icon:	facebook
 #    url:	https://facebook.com/???
 #    desc: Connect with me facebook
-#    share_url: https://www.facebook.com/sharer.php
-#    share_title: ?t=
-#    share_link: "&amp;u="
+    share_url: https://www.facebook.com/sharer.php
+    share_title: ?t=
+    share_link: "&amp;u="
 
   - icon:	github
     url:	https://github.com/sandipransing

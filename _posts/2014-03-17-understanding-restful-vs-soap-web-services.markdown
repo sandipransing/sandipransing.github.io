@@ -12,6 +12,7 @@ categories: REST SOAP
 In simple words, "Web services are developed to use by other software applications"
 
 Web services communicate via either SOAP or REST messages.
+
 ## REST
 REST stands for REpresentational State Transfer. It is a term coined by Roy Fielding in his Ph.D. dissertation 
 It is an architecture style for designing networked applications which typycally runs runs over HTTP.
@@ -65,6 +66,7 @@ It defines 3 fundamental properties:
 
 #### Sample SOAP request structure:
 In the example below, a GetStockPrice request is sent to a server. The request has a StockName parameter, and a Price parameter that will be returned in the response. The namespace for the function is defined in "http://www.example.org/stock".
+
 ```xml
 POST /InStock HTTP/1.1
 Host: www.example.org
@@ -83,7 +85,9 @@ SOAPAction: "http://www.w3.org/2003/05/soap-envelope"
   </soap:Body>
 </soap:Envelope>
 ```
+
 #### Sample SOAP response structure:
+
 ```
 HTTP/1.1 200 OK
 Content-Type: application/soap+xml; charset=utf-8
@@ -102,6 +106,7 @@ soap:encodingStyle="http://www.w3.org/2001/12/soap-encoding">
 
 </soap:Envelope>
 ```
+
 #### Highlights 
 Here are few **reasons** for which you may want to use SOAP: 
 
