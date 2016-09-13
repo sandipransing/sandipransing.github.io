@@ -17,6 +17,9 @@ title: "Fun On Rails"
 description: > # this means to ignore newlines until "email:"
   Journal of a Web Developer #ruby #rails #JS 
 
+subscribe_rss: "http://feeds.feedburner.com/funonrails"
+feed_count: "http://feeds.feedburner.com/~fc/funonrails?bg=CC3300&amp;fg=000000&amp;anim=0"
+subscribe_email: "http://feedburner.google.com/fb/a/mailverify?uri=funonrails&amp;loc=en_US"
 email: sandip@funonrails.com
 #blog logo
 logo: "/assets/images/for_logo.png"
@@ -86,3 +89,9 @@ social:
 #    share_url:
 #    share_title:
 #    share_link:
+
+# Google Analytics
+google_analytics_tracking_id: UA-48366424-1
+
+# Facebook Like
+facebook_like: false

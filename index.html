@@ -68,6 +68,9 @@ layout: default
             <div class="post-meta">
               <time datetime="{{ post.date | date_to_long_string }}">{{ post.date | date_to_long_string }}</time>
 <!--            <span class="post-tags-set">on {{#foreach tags}}<span class="post-tag-{{slug}}">{{#if @first}}{{else}}, {{/if}}<a href="/tag/{{slug}}">{{name}}</a></span>{{/foreach}}</span>-->
+                {% if site.disqus_short_name and page.comments != false and post.comments != false and site.disqus_show_comment_count == true %}
+                | <a href="{% if index %}{{ root_url }}{{ post.url }}{% endif %}#disqus_thread">Comments</a>
+                {% endif %}
             </div>
           </div>
         </article>
