@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <meta charset="utf-8">
+  <!-- (1) Optimize for mobile versions: http://goo.gl/EOpFl -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- (1) force latest IE rendering engine: bit.ly/1c8EiC9 -->
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+  <title>using thinking sphinx search in rails app</title>
+  <meta name="description" content="I am using acts_as_ferret and ferret server as of now with my rails application and it just works fine for me. The ONLY problem is performance as it takes a lot time to build index and to rebuild i..." />
+
+  <meta name="HandheldFriendly" content="True" />
+  <meta name="MobileOptimized" content="320" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:site" content="@sandipransing" />
+    <meta name="twitter:title" content="using thinking sphinx search in rails app" />
+    <meta name="twitter:image" content="http://funonrails.com/assets/images/for_logo.png" />
+    
+    <meta name="twitter:description"  content="I am using acts_as_ferret and ferret server as of now with my rails application and it just works fine for me. The ONLY problem is performance as it takes a lot time to build index and to rebuild i..." />
+    
+  
+  
+  <meta property="og:site_name" content="Fun On Rails" />
+  <meta property="og:title" content="using thinking sphinx search in rails app"/>
+  
+  <meta property="og:description" content="I am using acts_as_ferret and ferret server as of now with my rails application and it just works fine for me. The ONLY problem is performance as it takes a lot time to build index and to rebuild i..." />
+  
+  <meta property="og:image" content="http://funonrails.com/assets/images/for_logo.png" />
+  <meta property="og:url" content="http://funonrails.com/2010/04/using-thinking-sphinx-search-in-rails" >
+  <meta property="og:type" content="blog" />
+  <meta property="article:published_time" content="2010-04-12T19:07:00+05:30">
+
+  <link rel="canonical" href="http://funonrails.com/2010/04/using-thinking-sphinx-search-in-rails"/>
+  <link rel="shortcut icon" href="/assets/images/favicon.png" type="image/png"/>
+  <link rel="stylesheet" href="//brick.a.ssl.fastly.net/Linux+Libertine:400,400i,700,700i/Open+Sans:400,400i,700,700i">
+  <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+
+  <link rel="stylesheet" type="text/css" media="screen" href="/css/main.css" />
+  <link rel="stylesheet" type="text/css" media="print" href="/css/print.css" />
+</head>
+  <body itemscope itemtype="http://schema.org/Article">
+    <!-- header start -->
+
+<a href="http://funonrails.com" class="logo-readium"><span class="logo" style="background-image: url(/assets/images/for_logo.png)"></span></a>
+
+<!-- header end -->
+    <main class="content" role="main">
+      <article class="post">
+        
+        <div class="noarticleimage">
+          <div class="post-meta">
+            <h1 class="post-title">using thinking sphinx search in rails app</h1>
+            <div class="cf post-meta-text">
+              <div class="author-image" style="background-image: url(/assets/images/author.jpg)">Blog Logo</div>
+              <h4 class="author-name" itemprop="author" itemscope itemtype="http://schema.org/Person"></h4>
+              on
+              <time datetime="2010-04-12T19:07:00+05:30">12 Apr 2010</time>
+              <!-- , tagged on <span class="post-tag-">, <a href="/tag/"></a></span> -->
+            </div>
+          </div>
+        </div>
+        <br>
+        <br>
+        <br>
+        
+        <section class="post-content">
+          <div class="post-reading">
+            <span class="post-reading-time"></span> read
+          </div>
+          <a name="topofpage"></a>
+          <p>I am using <em>acts_as_ferret</em> and <em>ferret server</em> as of now with my rails application and it just works fine for me. The ONLY problem is <strong>performance</strong> as it takes a lot time to build index and to rebuild index when it gets screwed up and that’s where <strong>sphinx rocks</strong>! </p>
+
+<p>To get started with thinking sphinx you need to install sphinx server first. for installation help click here. </p>
+
+<p>To use sphinx search in rails we need to use either thinking sphinx gem or plugin that can be easily find on github. </p>
+
+<h2 id="plugin-installation">Plugin installation</h2>
+<figure class="code-highlight-figure"><div class="code-highlight"><pre class="code-highlight-pre"><div data-line="1" class="code-highlight-row numbered"><div class="code-highlight-line">ruby script/plugin install  git://github.com/freelancing-god/thinking-sphinx.git</div></div></pre></div></figure>
+
+<h4 id="or">OR</h4>
+<p>## Gem installation</p>
+
+<p>To install gem run the following command. <br />
+<figure class="code-highlight-figure">&lt;div class='code-highlight'&gt;&lt;pre class='code-highlight-pre'&gt;&lt;div data-line='1' class='code-highlight-row numbered'&gt;&lt;div class='code-highlight-line'&gt;gem install thinking-sphinx –source http://rubygems.org/
+&lt;/div&gt;&lt;/div&gt;&lt;div data-line='2' class='code-highlight-row numbered'&gt;&lt;div class='code-highlight-line'&gt; &lt;/div&gt;&lt;/div&gt;&lt;div data-line='3' class='code-highlight-row numbered'&gt;&lt;div class='code-highlight-line'&gt;If you’re upgrading, you should read this:
+&lt;/div&gt;&lt;/div&gt;&lt;div data-line='4' class='code-highlight-row numbered'&gt;&lt;div class='code-highlight-line'&gt;http://freelancing-god.github.com/ts/en/upgrading.html
+&lt;/div&gt;&lt;/div&gt;&lt;div data-line='5' class='code-highlight-row numbered'&gt;&lt;div class='code-highlight-line'&gt; &lt;/div&gt;&lt;/div&gt;&lt;div data-line='6' class='code-highlight-row numbered'&gt;&lt;div class='code-highlight-line'&gt;Successfully installed thinking-sphinx-1.3.16
+&lt;/div&gt;&lt;/div&gt;&lt;div data-line='7' class='code-highlight-row numbered'&gt;&lt;div class='code-highlight-line'&gt;1 gem installed&lt;/div&gt;&lt;/div&gt;&lt;/pre&gt;&lt;/div&gt;</figure></p>
+
+<p>Edit environment file and add following lines to it inside initializer block. <br />
+<figure class="code-highlight-figure">&lt;div class='code-highlight'&gt;&lt;pre class='code-highlight-pre'&gt;&lt;div data-line='1' class='code-highlight-row numbered'&gt;&lt;div class='code-highlight-line'&gt;config.gem(
+&lt;/div&gt;&lt;/div&gt;&lt;div data-line='2' class='code-highlight-row numbered'&gt;&lt;div class='code-highlight-line'&gt;     ‘thinking-sphinx’,
+&lt;/div&gt;&lt;/div&gt;&lt;div data-line='3' class='code-highlight-row numbered'&gt;&lt;div class='code-highlight-line'&gt;      :lib     =&gt; ‘thinking_sphinx’,
+&lt;/div&gt;&lt;/div&gt;&lt;div data-line='4' class='code-highlight-row numbered'&gt;&lt;div class='code-highlight-line'&gt;      :version =&gt; ‘1.3.16’
+&lt;/div&gt;&lt;/div&gt;&lt;div data-line='5' class='code-highlight-row numbered'&gt;&lt;div class='code-highlight-line'&gt; )&lt;/div&gt;&lt;/div&gt;&lt;/pre&gt;&lt;/div&gt;</figure></p>
+
+<p>Edit Rakefile and add following lines to it.</p>
+
+<figure class="code-highlight-figure"><div class="code-highlight"><pre class="code-highlight-pre"><div data-line="1" class="code-highlight-row numbered"><div class="code-highlight-line">require 'thinking_sphinx/tasks'</div></div></pre></div></figure>
+
+<p>List rake tasks that should show up sphinx related tasks. <br />
+<figure class="code-highlight-figure">&lt;div class='code-highlight'&gt;&lt;pre class='code-highlight-pre'&gt;&lt;div data-line='1' class='code-highlight-row numbered'&gt;&lt;div class='code-highlight-line'&gt;rake -T ts
+&lt;/div&gt;&lt;/div&gt;&lt;div data-line='2' class='code-highlight-row numbered'&gt;&lt;div class='code-highlight-line'&gt;(in /home/sandip/v1)
+&lt;/div&gt;&lt;/div&gt;&lt;div data-line='3' class='code-highlight-row numbered'&gt;&lt;div class='code-highlight-line'&gt;rake doc:plugins:acts_as_audited  # Generate documentation for the acts_as<em>…
+&lt;/div&gt;&lt;/div&gt;&lt;div data-line='4' class='code-highlight-row numbered'&gt;&lt;div class='code-highlight-line'&gt;rake doc:plugins:acts_as_ferret   # Generate documentation for the acts_as</em>…
+&lt;/div&gt;&lt;/div&gt;&lt;div data-line='5' class='code-highlight-row numbered'&gt;&lt;div class='code-highlight-line'&gt;rake rails:update:javascripts     # Update your javascripts from your curre…
+&lt;/div&gt;&lt;/div&gt;&lt;div data-line='6' class='code-highlight-row numbered'&gt;&lt;div class='code-highlight-line'&gt;rake rails:update:scripts         # Add new scripts to the application scri…
+&lt;/div&gt;&lt;/div&gt;&lt;div data-line='7' class='code-highlight-row numbered'&gt;&lt;div class='code-highlight-line'&gt;rake stats                        # Report code statistics (KLOCs, etc) fro…
+&lt;/div&gt;&lt;/div&gt;&lt;div data-line='8' class='code-highlight-row numbered'&gt;&lt;div class='code-highlight-line'&gt;rake test:units                   # Run tests for unitsdb:test:prepare / Ru…
+&lt;/div&gt;&lt;/div&gt;&lt;div data-line='9' class='code-highlight-row numbered'&gt;&lt;div class='code-highlight-line'&gt;rake tmp:sockets:clear            # Clears all files in tmp/sockets
+&lt;/div&gt;&lt;/div&gt;&lt;div data-line='10' class='code-highlight-row numbered'&gt;&lt;div class='code-highlight-line'&gt;rake ts:conf                      # Generate the Sphinx configuration file …
+&lt;/div&gt;&lt;/div&gt;&lt;div data-line='11' class='code-highlight-row numbered'&gt;&lt;div class='code-highlight-line'&gt;rake ts:config                    # Generate the Sphinx configuration file …
+&lt;/div&gt;&lt;/div&gt;&lt;div data-line='12' class='code-highlight-row numbered'&gt;&lt;div class='code-highlight-line'&gt;rake ts:in                        # Index data for Sphinx using Thinking Sp…
+&lt;/div&gt;&lt;/div&gt;&lt;div data-line='13' class='code-highlight-row numbered'&gt;&lt;div class='code-highlight-line'&gt;rake ts:rebuild                   # Stop Sphinx (if it’s running), rebuild …
+&lt;/div&gt;&lt;/div&gt;&lt;div data-line='14' class='code-highlight-row numbered'&gt;&lt;div class='code-highlight-line'&gt;rake ts:reindex                   # Reindex Sphinx without regenerating the…
+&lt;/div&gt;&lt;/div&gt;&lt;div data-line='15' class='code-highlight-row numbered'&gt;&lt;div class='code-highlight-line'&gt;rake ts:restart                   # Restart Sphinx / Restart Sphinx
+&lt;/div&gt;&lt;/div&gt;&lt;div data-line='16' class='code-highlight-row numbered'&gt;&lt;div class='code-highlight-line'&gt;rake ts:run                       # Stop if running, then start a Sphinx se…
+&lt;/div&gt;&lt;/div&gt;&lt;div data-line='17' class='code-highlight-row numbered'&gt;&lt;div class='code-highlight-line'&gt;rake ts:start                     # Start a Sphinx searchd daemon using Thi…
+&lt;/div&gt;&lt;/div&gt;&lt;div data-line='18' class='code-highlight-row numbered'&gt;&lt;div class='code-highlight-line'&gt;rake ts:stop                      # Stop Sphinx using Thinking Sphinx’s set…
+&lt;/div&gt;&lt;/div&gt;&lt;div data-line='19' class='code-highlight-row numbered'&gt;&lt;div class='code-highlight-line'&gt;rake ts:version                   # Output the current Thinking Sphinx vers…&lt;/div&gt;&lt;/div&gt;&lt;/pre&gt;&lt;/div&gt;</figure></p>
+
+<h2 id="starting-sphinx">Starting Sphinx</h2>
+
+<p>Start sphinx server this should give up an error.<br />
+<figure class="code-highlight-figure">&lt;div class='code-highlight'&gt;&lt;pre class='code-highlight-pre'&gt;&lt;div data-line='1' class='code-highlight-row numbered'&gt;&lt;div class='code-highlight-line'&gt;rake ts:start
+&lt;/div&gt;&lt;/div&gt;&lt;div data-line='2' class='code-highlight-row numbered'&gt;&lt;div class='code-highlight-line'&gt;(in /home/sandip/v1)
+&lt;/div&gt;&lt;/div&gt;&lt;div data-line='3' class='code-highlight-row numbered'&gt;&lt;div class='code-highlight-line'&gt;Failed to start searchd daemon. Check /home/sandip/v1/log/searchd.log.&lt;/div&gt;&lt;/div&gt;&lt;/pre&gt;&lt;/div&gt;</figure></p>
+
+<h2 id="adding-indexes-in-models">Adding indexes in models</h2>
+<figure class="code-highlight-figure"><div class="code-highlight"><pre class="code-highlight-pre"><div data-line="1" class="code-highlight-row numbered"><div class="code-highlight-line"><span class="n">define_index</span> <span class="k">do</span>
+</div></div><div data-line="2" class="code-highlight-row numbered"><div class="code-highlight-line">     <span class="c1"># following fields are database fields</span>
+</div></div><div data-line="3" class="code-highlight-row numbered"><div class="code-highlight-line">     <span class="c1"># we can not add model methods in sphinx index </span>
+</div></div><div data-line="4" class="code-highlight-row numbered"><div class="code-highlight-line">     <span class="c1"># sphinx fields allows ONLY model based associations</span>
+</div></div><div data-line="5" class="code-highlight-row numbered"><div class="code-highlight-line">     <span class="c1"># fields</span>
+</div></div><div data-line="6" class="code-highlight-row numbered"><div class="code-highlight-line">      <span class="n">indexes</span> <span class="n">customer_name</span>
+</div></div><div data-line="7" class="code-highlight-row numbered"><div class="code-highlight-line">      <span class="n">indexes</span> <span class="n">phone</span>
+</div></div><div data-line="8" class="code-highlight-row numbered"><div class="code-highlight-line">      <span class="n">indexes</span> <span class="n">mobile</span>
+</div></div><div data-line="9" class="code-highlight-row numbered"><div class="code-highlight-line">      <span class="n">indexes</span> <span class="n">other_phone</span>
+</div></div><div data-line="10" class="code-highlight-row numbered"><div class="code-highlight-line">      <span class="n">indexes</span> <span class="n">car_make</span>
+</div></div><div data-line="11" class="code-highlight-row numbered"><div class="code-highlight-line">      <span class="n">indexes</span> <span class="n">car_model</span>
+</div></div><div data-line="12" class="code-highlight-row numbered"><div class="code-highlight-line">      <span class="n">indexes</span> <span class="n">registration_no</span>
+</div></div><div data-line="13" class="code-highlight-row numbered"><div class="code-highlight-line"><span class="k">end</span></div></div></pre></div></figure>
+
+<h2 id="configure-sphinx">Configure sphinx</h2>
+<figure class="code-highlight-figure"><div class="code-highlight"><pre class="code-highlight-pre"><div data-line="1" class="code-highlight-row numbered"><div class="code-highlight-line">rake ts:config
+</div></div><div data-line="2" class="code-highlight-row numbered"><div class="code-highlight-line">Generating Configuration to /home/sandip/v1/config/development.sphinx.conf
+</div></div><div data-line="3" class="code-highlight-row numbered"><div class="code-highlight-line">Index sphinx
+</div></div><div data-line="4" class="code-highlight-row numbered"><div class="code-highlight-line"> </div></div><div data-line="5" class="code-highlight-row numbered"><div class="code-highlight-line">rake ts:in
+</div></div><div data-line="6" class="code-highlight-row numbered"><div class="code-highlight-line">(in /home/sandip/v1)
+</div></div><div data-line="7" class="code-highlight-row numbered"><div class="code-highlight-line">Generating Configuration to /home/sandip/v1/config/development.sphinx.conf
+</div></div><div data-line="8" class="code-highlight-row numbered"><div class="code-highlight-line">Sphinx 0.9.8-rc2 (r1234)
+</div></div><div data-line="9" class="code-highlight-row numbered"><div class="code-highlight-line">Copyright (c) 2001-2008, Andrew Aksyonoff
+</div></div><div data-line="10" class="code-highlight-row numbered"><div class="code-highlight-line"> </div></div><div data-line="11" class="code-highlight-row numbered"><div class="code-highlight-line">using config file '/home/sandip/v1/config/development.sphinx.conf'...
+</div></div><div data-line="12" class="code-highlight-row numbered"><div class="code-highlight-line">indexing index 'call_core'...
+</div></div><div data-line="13" class="code-highlight-row numbered"><div class="code-highlight-line">collected 113521 docs, 2.1 MB
+</div></div><div data-line="14" class="code-highlight-row numbered"><div class="code-highlight-line">collected 0 attr values
+</div></div><div data-line="15" class="code-highlight-row numbered"><div class="code-highlight-line">sorted 0.1 Mvalues, 100.0% done
+</div></div><div data-line="16" class="code-highlight-row numbered"><div class="code-highlight-line">sorted 0.3 Mhits, 100.0% done
+</div></div><div data-line="17" class="code-highlight-row numbered"><div class="code-highlight-line">total 113521 docs, 2114790 bytes
+</div></div><div data-line="18" class="code-highlight-row numbered"><div class="code-highlight-line">total 6.102 sec, 346589.68 bytes/sec, 18604.78 docs/sec
+</div></div><div data-line="19" class="code-highlight-row numbered"><div class="code-highlight-line">distributed index 'call' can not be directly indexed; skipping.
+</div></div><div data-line="20" class="code-highlight-row numbered"><div class="code-highlight-line">Generating Configuration to /home/sandip/v1/config/development.sphinx.conf
+</div></div><div data-line="21" class="code-highlight-row numbered"><div class="code-highlight-line">Sphinx 0.9.8-rc2 (r1234)
+</div></div><div data-line="22" class="code-highlight-row numbered"><div class="code-highlight-line">Copyright (c) 2001-2008, Andrew Aksyonoff
+</div></div><div data-line="23" class="code-highlight-row numbered"><div class="code-highlight-line"> </div></div><div data-line="24" class="code-highlight-row numbered"><div class="code-highlight-line">using config file '/home/sandip/v1/config/development.sphinx.conf'...
+</div></div><div data-line="25" class="code-highlight-row numbered"><div class="code-highlight-line">indexing index 'call_core'...
+</div></div><div data-line="26" class="code-highlight-row numbered"><div class="code-highlight-line">collected 113521 docs, 2.1 MB
+</div></div><div data-line="27" class="code-highlight-row numbered"><div class="code-highlight-line">collected 0 attr values
+</div></div><div data-line="28" class="code-highlight-row numbered"><div class="code-highlight-line">sorted 0.1 Mvalues, 100.0% done
+</div></div><div data-line="29" class="code-highlight-row numbered"><div class="code-highlight-line">sorted 0.3 Mhits, 100.0% done
+</div></div><div data-line="30" class="code-highlight-row numbered"><div class="code-highlight-line">total 113521 docs, 2114790 bytes
+</div></div><div data-line="31" class="code-highlight-row numbered"><div class="code-highlight-line">total 3.628 sec, 582909.70 bytes/sec, 31290.34 docs/sec
+</div></div><div data-line="32" class="code-highlight-row numbered"><div class="code-highlight-line">distributed index 'call' can not be directly indexed; skipping.</div></div></pre></div></figure>
+
+<h2 id="search-using-sphinx">Search using sphinx</h2>
+<figure class="code-highlight-figure"><div class="code-highlight"><pre class="code-highlight-pre"><div data-line="1" class="code-highlight-row numbered"><div class="code-highlight-line"><span class="n">ruby</span> <span class="n">script</span> <span class="n">console</span>
+</div></div><div data-line="2" class="code-highlight-row numbered"><div class="code-highlight-line"> </div></div><div data-line="3" class="code-highlight-row numbered"><div class="code-highlight-line"><span class="o">&gt;&gt;</span><span class="no">Call</span><span class="o">.</span><span class="n">search</span> <span class="s1">&#39;sandip&#39;</span>
+</div></div><div data-line="4" class="code-highlight-row numbered"><div class="code-highlight-line"><span class="o">=&gt;</span> <span class="o">[</span><span class="c1">#&lt;call 00:00:00&quot;=&quot;&quot; 09:22:35&quot;,=&quot;&quot; 1018,=&quot;&quot; 18:10:00&quot;,=&quot;&quot; 2009-02-10=&quot;&quot; 2009-03-27=&quot;&quot; 2009-04-07=&quot;&quot; 2009-11-18=&quot;&quot; 20:29:06&quot;,=&quot;&quot; 6,=&quot;&quot; created_at:=&quot;&quot; id:=&quot;&quot; insurance_expiry_date:=&quot;&quot; is=&quot;&quot; is_existing_customer:=&quot;&quot; nil,=&quot;&quot; note:=&quot;&quot; phone=&quot;&quot; ringing&quot;,=&quot;&quot; scheduled_at:=&quot;&quot; state_id:=&quot;&quot; station_shift_customer_car_insurance_product_id:=&quot;&quot; updated_at:=&quot;&quot;&gt;, #&lt;call 00:00:00&quot;=&quot;&quot; 11:13:33&quot;,=&quot;&quot; 18:30:00&quot;,=&quot;&quot; 2009-02-10=&quot;&quot; 2009-02-16=&quot;&quot; 2009-04-03=&quot;&quot; 2009-11-18=&quot;&quot; 20:34:52&quot;,=&quot;&quot; 6,=&quot;&quot; 6024,=&quot;&quot; call=&quot;&quot; created&quot;,=&quot;&quot; created_at:=&quot;&quot; customer=&quot;&quot; id:=&quot;&quot; insurance_expiry_date:=&quot;&quot; is_existing_customer:=&quot;&quot; new=&quot;&quot; nil,=&quot;&quot; note:=&quot;&quot; scheduled_at:=&quot;&quot; state_id:=&quot;&quot; station_shift_customer_car_insurance_product_id:=&quot;&quot; updated_at:=&quot;&quot;&gt;] &lt;/call&gt;&lt;/call&gt;</span></div></div></pre></div></figure>
+
+<p>It returns array of records found. conditions are allowed by sphinx. If you need to add conditions on integer attributes then index block in model needs to have has method like author_id in following. <br />
+<figure class="code-highlight-figure">&lt;div class='code-highlight'&gt;&lt;pre class='code-highlight-pre'&gt;&lt;div data-line='1' class='code-highlight-row numbered'&gt;&lt;div class='code-highlight-line'&gt;<span class="n">define_index</span> <span class="k">do</span>
+&lt;/div&gt;&lt;/div&gt;&lt;div data-line='2' class='code-highlight-row numbered'&gt;&lt;div class='code-highlight-line'&gt;  <span class="n">indexes</span> <span class="n">content</span>
+&lt;/div&gt;&lt;/div&gt;&lt;div data-line='3' class='code-highlight-row numbered'&gt;&lt;div class='code-highlight-line'&gt;  <span class="n">indexes</span> <span class="ss">:name</span><span class="p">,</span> <span class="ss">:sortable</span> <span class="o">=&gt;</span> <span class="kp">true</span>
+&lt;/div&gt;&lt;/div&gt;&lt;div data-line='4' class='code-highlight-row numbered'&gt;&lt;div class='code-highlight-line'&gt;  <span class="n">indexes</span> <span class="n">comments</span><span class="o">.</span><span class="n">content</span><span class="p">,</span> <span class="ss">:as</span> <span class="o">=&gt;</span> <span class="ss">:comment_content</span>
+&lt;/div&gt;&lt;/div&gt;&lt;div data-line='5' class='code-highlight-row numbered'&gt;&lt;div class='code-highlight-line'&gt;  <span class="n">indexes</span> <span class="o">[</span><span class="n">author</span><span class="o">.</span><span class="n">first_name</span><span class="p">,</span> <span class="n">author</span><span class="o">.</span><span class="n">last_name</span><span class="o">]</span><span class="p">,</span> <span class="ss">:as</span> <span class="o">=&gt;</span> <span class="ss">:author_name</span>
+&lt;/div&gt;&lt;/div&gt;&lt;div data-line='6' class='code-highlight-row numbered'&gt;&lt;div class='code-highlight-line'&gt; &lt;/div&gt;&lt;/div&gt;&lt;div data-line='7' class='code-highlight-row numbered'&gt;&lt;div class='code-highlight-line'&gt;  <span class="n">has</span> <span class="n">author_id</span><span class="p">,</span> <span class="n">created_at</span>
+&lt;/div&gt;&lt;/div&gt;&lt;div data-line='8' class='code-highlight-row numbered'&gt;&lt;div class='code-highlight-line'&gt;<span class="k">end</span>&lt;/div&gt;&lt;/div&gt;&lt;/pre&gt;&lt;/div&gt;</figure></p>
+
+
+        </section>
+        <footer class="post-footer">
+          <section class="share">
+            
+              
+                <a class="icon-twitter" href="http://twitter.com/share?text=using+thinking+sphinx+search+in+rails+app&amp;url=http://funonrails.com/2010/04/using-thinking-sphinx-search-in-rails"
+                  onclick="window.open(this.href, 'twitter-share', 'width=550,height=255');return false;">
+                <i class="fa fa-twitter"></i><span class="hidden">twitter</span>
+                </a>
+              
+            
+              
+                <a class="icon-facebook" href="https://www.facebook.com/sharer.php?t=using+thinking+sphinx+search+in+rails+app&amp;u=http://funonrails.com/2010/04/using-thinking-sphinx-search-in-rails"
+                  onclick="window.open(this.href, 'facebook-share', 'width=550,height=255');return false;">
+                <i class="fa fa-facebook"></i><span class="hidden">facebook</span>
+                </a>
+              
+            
+              
+            
+          </section>
+        </footer>
+        <div class="bottom-teaser cf">
+          <div class="isLeft">
+            <h5 class="index-headline featured"><span>Written by</span></h5>
+            <section class="author">
+              <div class="author-image" style="background-image: url(/assets/images/author.jpg)">Blog Logo</div>
+              <h4>Sandip Ransing</h4>
+              <p class="bio"></p>
+              <hr>
+              <p class="published">Published <time datetime="2010-04-12 19:07">12 Apr 2010</time></p>
+            </section>
+          </div>
+          
+          <div class="isRight">
+            <h5 class="index-headline featured"><span>Supported by</span></h5>
+            <footer class="site-footer">
+              <section class="poweredby">Proudly published with <a href="http://jekyllrb.com"> Jekyll</a></section>
+              <a class="subscribe" href="/feed.xml"> <span class="tooltip"> <i class="fa fa-rss"></i> You should subscribe to my feed.</span></a>
+              <div class="inner">
+                <section class="copyright">All content copyright <a href="/">Sandip Ransing</a> &copy; 2016<br>All rights reserved.</section>
+              </div>
+            </footer>
+          </div>
+        </div>
+        
+      </article>
+    </main>
+    <div class="bottom-closer">
+      <div class="background-closer-image"  style="background-image: url()">
+        Image
+      </div>
+      <div class="inner">
+        <h1 class="blog-title">Fun On Rails</h1>
+        <h2 class="blog-description">Journal of a Web Developer #ruby #rails #JS 
+</h2>
+        <a href="/" class="btn">Back to Overview</a>
+      </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
+<script type="text/javascript" src="/assets/js/jquery.fitvids.js"></script>
+<script type="text/javascript" src="/assets/js/index.js"></script>
+<script type="text/javascript" src="/assets/js/readingTime.min.js"></script>
+<script>
+(function ($) {
+  "use strict";
+  $(document).ready(function(){
+
+    var $window = $(window),
+    $image = $('.post-image-image, .teaserimage-image');
+    
+      $window.on('scroll', function() {
+        var top = $window.scrollTop();
+
+        if (top < 0 || top > 1500) { return; }
+        $image
+          .css('transform', 'translate3d(0px, '+top/3+'px, 0px)')
+          .css('opacity', 1-Math.max(top/700, 0));
+      });
+      $window.trigger('scroll');
+
+      var height = $('.article-image').height();
+      $('.post-content').css('padding-top', height + 'px');
+
+      $('a[href*=#]:not([href=#])').click(function() {
+        if (location.pathname.replace(/^\//,'') == this.pathname.replace(/^\//,'')
+         && location.hostname == this.hostname) {
+          var target = $(this.hash);
+          target = target.length ? target : $('[name=' + this.hash.slice(1) +']');
+          if (target.length) {
+            $('html,body').animate({ scrollTop: target.offset().top }, 500);
+            return false;
+          }
+        }
+      });
+
+  });
+}(jQuery));
+</script>
+    
+  </body>
+</html>

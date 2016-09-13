@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <meta charset="utf-8">
+  <!-- (1) Optimize for mobile versions: http://goo.gl/EOpFl -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- (1) force latest IE rendering engine: bit.ly/1c8EiC9 -->
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+  <title>Intresting String inflections in rails</title>
+  <meta name="description" content="Here is list of string inflections :  camelcase  camelize  classify  constantize  dasherize  demodulize  foreign_key  humanize  parameterize  pluralize  singularize  tableize  titlecase  titleize  ..." />
+
+  <meta name="HandheldFriendly" content="True" />
+  <meta name="MobileOptimized" content="320" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:site" content="@sandipransing" />
+    <meta name="twitter:title" content="Intresting String inflections in rails" />
+    <meta name="twitter:image" content="http://funonrails.com/assets/images/for_logo.png" />
+    
+    <meta name="twitter:description"  content="Here is list of string inflections :  camelcase  camelize  classify  constantize  dasherize  demodulize  foreign_key  humanize  parameterize  pluralize  singularize  tableize  titlecase  titleize  ..." />
+    
+  
+  
+  <meta property="og:site_name" content="Fun On Rails" />
+  <meta property="og:title" content="Intresting String inflections in rails"/>
+  
+  <meta property="og:description" content="Here is list of string inflections :  camelcase  camelize  classify  constantize  dasherize  demodulize  foreign_key  humanize  parameterize  pluralize  singularize  tableize  titlecase  titleize  ..." />
+  
+  <meta property="og:image" content="http://funonrails.com/assets/images/for_logo.png" />
+  <meta property="og:url" content="http://funonrails.com/2009/05/interesting-string-inflections-in-rails" >
+  <meta property="og:type" content="blog" />
+  <meta property="article:published_time" content="2009-05-22T19:58:00+05:30">
+
+  <link rel="canonical" href="http://funonrails.com/2009/05/interesting-string-inflections-in-rails"/>
+  <link rel="shortcut icon" href="/assets/images/favicon.png" type="image/png"/>
+  <link rel="stylesheet" href="//brick.a.ssl.fastly.net/Linux+Libertine:400,400i,700,700i/Open+Sans:400,400i,700,700i">
+  <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+
+  <link rel="stylesheet" type="text/css" media="screen" href="/css/main.css" />
+  <link rel="stylesheet" type="text/css" media="print" href="/css/print.css" />
+</head>
+  <body itemscope itemtype="http://schema.org/Article">
+    <!-- header start -->
+
+<a href="http://funonrails.com" class="logo-readium"><span class="logo" style="background-image: url(/assets/images/for_logo.png)"></span></a>
+
+<!-- header end -->
+    <main class="content" role="main">
+      <article class="post">
+        
+        <div class="noarticleimage">
+          <div class="post-meta">
+            <h1 class="post-title">Intresting String inflections in rails</h1>
+            <div class="cf post-meta-text">
+              <div class="author-image" style="background-image: url(/assets/images/author.jpg)">Blog Logo</div>
+              <h4 class="author-name" itemprop="author" itemscope itemtype="http://schema.org/Person"></h4>
+              on
+              <time datetime="2009-05-22T19:58:00+05:30">22 May 2009</time>
+              <!-- , tagged on <span class="post-tag-">, <a href="/tag/"></a></span> -->
+            </div>
+          </div>
+        </div>
+        <br>
+        <br>
+        <br>
+        
+        <section class="post-content">
+          <div class="post-reading">
+            <span class="post-reading-time"></span> read
+          </div>
+          <a name="topofpage"></a>
+          <p>Here is list of string inflections :</p>
+
+<ul>
+  <li>camelcase</li>
+  <li>camelize</li>
+  <li>classify</li>
+  <li>constantize</li>
+  <li>dasherize</li>
+  <li>demodulize</li>
+  <li>foreign_key</li>
+  <li>humanize</li>
+  <li>parameterize</li>
+  <li>pluralize</li>
+  <li>singularize</li>
+  <li>tableize</li>
+  <li>titlecase</li>
+  <li>titleize</li>
+  <li>underscore</li>
+</ul>
+
+<h4 id="camelcase">camelcase()</h4>
+<figure class="code-highlight-figure"><div class="code-highlight"><pre class="code-highlight-pre"><div data-line="1" class="code-highlight-row numbered"><div class="code-highlight-line">camelcase(first_letter = :upper)</div></div></pre></div></figure>
+
+<p>Alias for camelize<br />
+<figure class="code-highlight-figure">&lt;div class='code-highlight'&gt;&lt;pre class='code-highlight-pre'&gt;&lt;div data-line='1' class='code-highlight-row numbered'&gt;&lt;div class='code-highlight-line'&gt;<span class="n">camelize</span><span class="p">(</span><span class="n">first_letter</span> <span class="o">=</span> <span class="ss">:upper</span><span class="p">)</span>&lt;/div&gt;&lt;/div&gt;&lt;/pre&gt;&lt;/div&gt;</figure></p>
+
+<p>By default, camelize converts strings to UpperCamelCase. If the argument to camelize is set to :lower then camelize produces lowerCamelCase.</p>
+
+<p>camelize will also convert ’/’ to ’::’ which is useful for converting paths to namespaces.<br />
+<figure class="code-highlight-figure">&lt;div class='code-highlight'&gt;&lt;pre class='code-highlight-pre'&gt;&lt;div data-line='1' class='code-highlight-row numbered'&gt;&lt;div class='code-highlight-line'&gt;“active_record”.camelize # =&gt; “ActiveRecord”
+&lt;/div&gt;&lt;/div&gt;&lt;div data-line='2' class='code-highlight-row numbered'&gt;&lt;div class='code-highlight-line'&gt;“active_record”.camelize(:lower) # =&gt; “activeRecord”
+&lt;/div&gt;&lt;/div&gt;&lt;div data-line='3' class='code-highlight-row numbered'&gt;&lt;div class='code-highlight-line'&gt;“active_record/errors”.camelize # =&gt; “ActiveRecord::Errors”
+&lt;/div&gt;&lt;/div&gt;&lt;div data-line='4' class='code-highlight-row numbered'&gt;&lt;div class='code-highlight-line'&gt;“active_record/errors”.camelize(:lower) # =&gt; “activeRecord::Errors”&lt;/div&gt;&lt;/div&gt;&lt;/pre&gt;&lt;/div&gt;</figure></p>
+
+<p>This method is also aliased as camelcase</p>
+
+<h4 id="classify">classify()</h4>
+
+<p>Create a class name from a plural table name like Rails does for table names to models. Note that this returns a string and not a class. (To convert to an actual class follow classify with constantize.)<br />
+<figure class="code-highlight-figure">&lt;div class='code-highlight'&gt;&lt;pre class='code-highlight-pre'&gt;&lt;div data-line='1' class='code-highlight-row numbered'&gt;&lt;div class='code-highlight-line'&gt;<span class="s2">"egg_and_hams"</span><span class="o">.</span><span class="n">classify</span> <span class="c1"># =&gt; "EggAndHam"</span>
+&lt;/div&gt;&lt;/div&gt;&lt;div data-line='2' class='code-highlight-row numbered'&gt;&lt;div class='code-highlight-line'&gt;<span class="s2">"posts"</span><span class="o">.</span><span class="n">classify</span> <span class="c1"># =&gt; "Post"</span>
+&lt;/div&gt;&lt;/div&gt;&lt;div data-line='3' class='code-highlight-row numbered'&gt;&lt;div class='code-highlight-line'&gt; &lt;/div&gt;&lt;/div&gt;&lt;div data-line='4' class='code-highlight-row numbered'&gt;&lt;div class='code-highlight-line'&gt;<span class="c1"># Singular names are not handled correctly.</span>
+&lt;/div&gt;&lt;/div&gt;&lt;div data-line='5' class='code-highlight-row numbered'&gt;&lt;div class='code-highlight-line'&gt; &lt;/div&gt;&lt;/div&gt;&lt;div data-line='6' class='code-highlight-row numbered'&gt;&lt;div class='code-highlight-line'&gt;<span class="s2">"business"</span><span class="o">.</span><span class="n">classify</span> <span class="c1"># =&gt; "Busines"</span>&lt;/div&gt;&lt;/div&gt;&lt;/pre&gt;&lt;/div&gt;</figure></p>
+
+<h4 id="constantize">constantize()</h4>
+
+<p>constantize tries to find a declared constant with the name specified in the string. It raises a NameError when the name is not in CamelCase or is not initialized.</p>
+
+<p><strong>Examples :</strong></p>
+
+<p>“Module”.constantize # =&gt; Module<br />
+“Class”.constantize # =&gt; Class</p>
+
+<h4 id="dasherize">dasherize()</h4>
+
+<p>Replaces underscores with dashes in the string.<br />
+<figure class="code-highlight-figure">&lt;div class='code-highlight'&gt;&lt;pre class='code-highlight-pre'&gt;&lt;div data-line='1' class='code-highlight-row numbered'&gt;&lt;div class='code-highlight-line'&gt;“puni_puni” # =&gt; “puni-puni”&lt;/div&gt;&lt;/div&gt;&lt;/pre&gt;&lt;/div&gt;</figure></p>
+
+<h4 id="demodulize">demodulize()</h4>
+
+<p>Removes the module part from the constant expression in the string.</p>
+
+<figure class="code-highlight-figure"><div class="code-highlight"><pre class="code-highlight-pre"><div data-line="1" class="code-highlight-row numbered"><div class="code-highlight-line"><span class="s2">&quot;ActiveRecord::CoreExtensions::String::Inflections&quot;</span><span class="o">.</span><span class="n">demodulize</span> <span class="c1"># =&gt; &quot;Inflections&quot;</span>
+</div></div><div data-line="2" class="code-highlight-row numbered"><div class="code-highlight-line"><span class="s2">&quot;Inflections&quot;</span><span class="o">.</span><span class="n">demodulize</span> <span class="c1"># =&gt; &quot;Inflections&quot;</span></div></div></pre></div></figure>
+
+<h4 id="foreignkeyseparateclassnameandidwithunderscore--true">foreign_key(separate_class_name_and_id_with_underscore = true)</h4>
+
+<p>Creates a foreign key name from a class name. separate_class_name_and_id_with_underscore sets whether the method should put “_” between the name and ‘id’.</p>
+
+<p><strong>Examples :</strong></p>
+
+<figure class="code-highlight-figure"><div class="code-highlight"><pre class="code-highlight-pre"><div data-line="1" class="code-highlight-row numbered"><div class="code-highlight-line"><span class="s2">&quot;Message&quot;</span><span class="o">.</span><span class="n">foreign_key</span> <span class="c1"># =&gt; &quot;message_id&quot;</span>
+</div></div><div data-line="2" class="code-highlight-row numbered"><div class="code-highlight-line"><span class="s2">&quot;Message&quot;</span><span class="o">.</span><span class="n">foreign_key</span><span class="p">(</span><span class="kp">false</span><span class="p">)</span> <span class="c1"># =&gt; &quot;messageid&quot;</span>
+</div></div><div data-line="3" class="code-highlight-row numbered"><div class="code-highlight-line"><span class="s2">&quot;Admin::Post&quot;</span><span class="o">.</span><span class="n">foreign_key</span> <span class="c1"># =&gt; &quot;post_id&quot;</span></div></div></pre></div></figure>
+
+<h4 id="humanize">humanize()</h4>
+
+<p>Capitalizes the first word, turns underscores into spaces, and strips <code>_id</code>. Like titleize, this is meant for creating pretty output.<br />
+<figure class="code-highlight-figure">&lt;div class='code-highlight'&gt;&lt;pre class='code-highlight-pre'&gt;&lt;div data-line='1' class='code-highlight-row numbered'&gt;&lt;div class='code-highlight-line'&gt;<span class="s2">"employee_salary"</span> <span class="c1"># =&gt; "Employee salary"</span>
+&lt;/div&gt;&lt;/div&gt;&lt;div data-line='2' class='code-highlight-row numbered'&gt;&lt;div class='code-highlight-line'&gt;<span class="s2">"author_id"</span> <span class="c1"># =&gt; "Author"</span>&lt;/div&gt;&lt;/div&gt;&lt;/pre&gt;&lt;/div&gt;</figure><br />
+`<br />
+#### parameterize()</p>
+
+<p>Replaces special characters in a string so that it may be used as part of a ‘pretty’ URL.<br />
+<strong>Examples :</strong></p>
+
+<figure class="code-highlight-figure"><div class="code-highlight"><pre class="code-highlight-pre"><div data-line="1" class="code-highlight-row numbered"><div class="code-highlight-line"><span class="k">class</span> <span class="nc">Person</span>
+</div></div><div data-line="2" class="code-highlight-row numbered"><div class="code-highlight-line">  <span class="k">def</span> <span class="nf">to_param</span>
+</div></div><div data-line="3" class="code-highlight-row numbered"><div class="code-highlight-line">  <span class="s2">&quot;</span><span class="si">#&#x7b;</span><span class="nb">id</span><span class="si">&#x7d;</span><span class="s2">-</span><span class="si">#&#x7b;</span><span class="nb">name</span><span class="o">.</span><span class="n">parameterize</span><span class="si">&#x7d;</span><span class="s2">&quot;</span>
+</div></div><div data-line="4" class="code-highlight-row numbered"><div class="code-highlight-line">  <span class="k">end</span>
+</div></div><div data-line="5" class="code-highlight-row numbered"><div class="code-highlight-line"><span class="k">end</span>
+</div></div><div data-line="6" class="code-highlight-row numbered"><div class="code-highlight-line"> </div></div><div data-line="7" class="code-highlight-row numbered"><div class="code-highlight-line"><span class="vi">@person</span> <span class="o">=</span> <span class="no">Person</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+</div></div><div data-line="8" class="code-highlight-row numbered"><div class="code-highlight-line"><span class="c1"># =&gt; Donald E. Knuth</span></div></div></pre></div></figure>
+
+<h4 id="pluralize">pluralize()</h4>
+
+<p>Returns the plural form of the word in the string.<br />
+<figure class="code-highlight-figure">&lt;div class='code-highlight'&gt;&lt;pre class='code-highlight-pre'&gt;&lt;div data-line='1' class='code-highlight-row numbered'&gt;&lt;div class='code-highlight-line'&gt;<span class="s2">"post"</span><span class="o">.</span><span class="n">pluralize</span> <span class="c1"># =&gt; "posts"</span>
+&lt;/div&gt;&lt;/div&gt;&lt;div data-line='2' class='code-highlight-row numbered'&gt;&lt;div class='code-highlight-line'&gt;<span class="s2">"octopus"</span><span class="o">.</span><span class="n">pluralize</span> <span class="c1"># =&gt; "octopi"</span>
+&lt;/div&gt;&lt;/div&gt;&lt;div data-line='3' class='code-highlight-row numbered'&gt;&lt;div class='code-highlight-line'&gt;<span class="s2">"sheep"</span><span class="o">.</span><span class="n">pluralize</span> <span class="c1"># =&gt; "sheep"</span>
+&lt;/div&gt;&lt;/div&gt;&lt;div data-line='4' class='code-highlight-row numbered'&gt;&lt;div class='code-highlight-line'&gt;<span class="s2">"words"</span><span class="o">.</span><span class="n">pluralize</span> <span class="c1"># =&gt; "words"</span>
+&lt;/div&gt;&lt;/div&gt;&lt;div data-line='5' class='code-highlight-row numbered'&gt;&lt;div class='code-highlight-line'&gt;<span class="s2">"the blue mailman"</span><span class="o">.</span><span class="n">pluralize</span> <span class="c1"># =&gt; "the blue mailmen"</span>
+&lt;/div&gt;&lt;/div&gt;&lt;div data-line='6' class='code-highlight-row numbered'&gt;&lt;div class='code-highlight-line'&gt;<span class="s2">"CamelOctopus"</span><span class="o">.</span><span class="n">pluralize</span> <span class="c1"># =&gt; "CamelOctopi"</span>&lt;/div&gt;&lt;/div&gt;&lt;/pre&gt;&lt;/div&gt;</figure></p>
+
+<h4 id="singularize">singularize()</h4>
+
+<p>The reverse of pluralize, returns the singular form of a word in a string.</p>
+
+<figure class="code-highlight-figure"><div class="code-highlight"><pre class="code-highlight-pre"><div data-line="1" class="code-highlight-row numbered"><div class="code-highlight-line"><span class="s2">&quot;posts&quot;</span><span class="o">.</span><span class="n">singularize</span> <span class="c1"># =&gt; &quot;post&quot;</span>
+</div></div><div data-line="2" class="code-highlight-row numbered"><div class="code-highlight-line"><span class="s2">&quot;octopi&quot;</span><span class="o">.</span><span class="n">singularize</span> <span class="c1"># =&gt; &quot;octopus&quot;</span>
+</div></div><div data-line="3" class="code-highlight-row numbered"><div class="code-highlight-line"><span class="s2">&quot;sheep&quot;</span><span class="o">.</span><span class="n">singularize</span> <span class="c1"># =&gt; &quot;sheep&quot;</span>
+</div></div><div data-line="4" class="code-highlight-row numbered"><div class="code-highlight-line"><span class="s2">&quot;word&quot;</span><span class="o">.</span><span class="n">singularize</span> <span class="c1"># =&gt; &quot;word&quot;</span>
+</div></div><div data-line="5" class="code-highlight-row numbered"><div class="code-highlight-line"><span class="s2">&quot;the blue mailmen&quot;</span><span class="o">.</span><span class="n">singularize</span> <span class="c1"># =&gt; &quot;the blue mailman&quot;</span>
+</div></div><div data-line="6" class="code-highlight-row numbered"><div class="code-highlight-line"><span class="s2">&quot;CamelOctopi&quot;</span><span class="o">.</span><span class="n">singularize</span> <span class="c1"># =&gt; &quot;CamelOctopus&quot;</span></div></div></pre></div></figure>
+
+<h4 id="tableize">tableize()</h4>
+
+<p>Creates the name of a table like Rails does for models to table names. This method uses the pluralize method on the last word in the string.<br />
+<figure class="code-highlight-figure">&lt;div class='code-highlight'&gt;&lt;pre class='code-highlight-pre'&gt;&lt;div data-line='1' class='code-highlight-row numbered'&gt;&lt;div class='code-highlight-line'&gt;<span class="s2">"RawScaledScorer"</span><span class="o">.</span><span class="n">tableize</span> <span class="c1"># =&gt; "raw_scaled_scorers"</span>
+&lt;/div&gt;&lt;/div&gt;&lt;div data-line='2' class='code-highlight-row numbered'&gt;&lt;div class='code-highlight-line'&gt;<span class="s2">"egg_and_ham"</span><span class="o">.</span><span class="n">tableize</span> <span class="c1"># =&gt; "egg_and_hams"</span>
+&lt;/div&gt;&lt;/div&gt;&lt;div data-line='3' class='code-highlight-row numbered'&gt;&lt;div class='code-highlight-line'&gt;<span class="s2">"fancyCategory"</span><span class="o">.</span><span class="n">tableize</span> <span class="c1"># =&gt; "fancy_categories"</span>&lt;/div&gt;&lt;/div&gt;&lt;/pre&gt;&lt;/div&gt;</figure></p>
+
+<h4 id="titlecase">titlecase()</h4>
+
+<p>Alias for titleize<br />
+titleize()</p>
+
+<p>Capitalizes all the words and replaces some characters in the string to create a nicer looking title. titleize is meant for creating pretty output. It is not used in the Rails internals.</p>
+
+<p>titleize is also aliased as titlecase.<br />
+<figure class="code-highlight-figure">&lt;div class='code-highlight'&gt;&lt;pre class='code-highlight-pre'&gt;&lt;div data-line='1' class='code-highlight-row numbered'&gt;&lt;div class='code-highlight-line'&gt;<span class="s2">"man from the boondocks"</span><span class="o">.</span><span class="n">titleize</span>
+&lt;/div&gt;&lt;/div&gt;&lt;div data-line='2' class='code-highlight-row numbered'&gt;&lt;div class='code-highlight-line'&gt;<span class="c1"># =&gt; "Man From The Boondocks"</span>
+&lt;/div&gt;&lt;/div&gt;&lt;div data-line='3' class='code-highlight-row numbered'&gt;&lt;div class='code-highlight-line'&gt;<span class="s2">"x-men: the last stand"</span><span class="o">.</span><span class="n">titleize</span>
+&lt;/div&gt;&lt;/div&gt;&lt;div data-line='4' class='code-highlight-row numbered'&gt;&lt;div class='code-highlight-line'&gt;<span class="c1"># =&gt; "X Men: The Last Stand"</span>&lt;/div&gt;&lt;/div&gt;&lt;/pre&gt;&lt;/div&gt;</figure></p>
+
+<p>This method is also aliased as titlecase</p>
+
+<h4 id="underscore">underscore()</h4>
+
+<p>The reverse of camelize. Makes an underscored, lowercase form from the expression in the string.<br />
+underscore will also change ’::’ to ’/’ to convert namespaces to paths.</p>
+
+<figure class="code-highlight-figure"><div class="code-highlight"><pre class="code-highlight-pre"><div data-line="1" class="code-highlight-row numbered"><div class="code-highlight-line"><span class="s2">&quot;ActiveRecord&quot;</span><span class="o">.</span><span class="n">underscore</span>
+</div></div><div data-line="2" class="code-highlight-row numbered"><div class="code-highlight-line"><span class="c1"># =&gt; &quot;active_record&quot;</span>
+</div></div><div data-line="3" class="code-highlight-row numbered"><div class="code-highlight-line"><span class="s2">&quot;ActiveRecord::Errors&quot;</span><span class="o">.</span><span class="n">underscore</span>
+</div></div><div data-line="4" class="code-highlight-row numbered"><div class="code-highlight-line"><span class="c1"># =&gt; active_record/errors</span></div></div></pre></div></figure>
+
+<h4 id="remove-special-characters-from-string">Remove special characters from string</h4>
+<figure class="code-highlight-figure"><div class="code-highlight"><pre class="code-highlight-pre"><div data-line="1" class="code-highlight-row numbered"><div class="code-highlight-line"><span class="s2">&quot;STRING&quot;</span><span class="o">.</span><span class="n">.gsub</span><span class="p">(</span><span class="sr">/[^a-zA-Z 0-9]/</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span>
+</div></div><div data-line="2" class="code-highlight-row numbered"><div class="code-highlight-line"> </div></div><div data-line="3" class="code-highlight-row numbered"><div class="code-highlight-line"><span class="c1"># escape special chars before save</span>
+</div></div><div data-line="4" class="code-highlight-row numbered"><div class="code-highlight-line"><span class="k">def</span> <span class="nf">before_save</span>
+</div></div><div data-line="5" class="code-highlight-row numbered"><div class="code-highlight-line">  <span class="nb">self</span><span class="o">.</span><span class="n">name</span><span class="o">.</span><span class="n">gsub</span><span class="p">(</span><span class="sr">/[^a-zA-Z 0-9]/</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span>
+</div></div><div data-line="6" class="code-highlight-row numbered"><div class="code-highlight-line"><span class="k">end</span></div></div></pre></div></figure>
+
+
+        </section>
+        <footer class="post-footer">
+          <section class="share">
+            
+              
+                <a class="icon-twitter" href="http://twitter.com/share?text=Intresting+String+inflections+in+rails&amp;url=http://funonrails.com/2009/05/interesting-string-inflections-in-rails"
+                  onclick="window.open(this.href, 'twitter-share', 'width=550,height=255');return false;">
+                <i class="fa fa-twitter"></i><span class="hidden">twitter</span>
+                </a>
+              
+            
+              
+                <a class="icon-facebook" href="https://www.facebook.com/sharer.php?t=Intresting+String+inflections+in+rails&amp;u=http://funonrails.com/2009/05/interesting-string-inflections-in-rails"
+                  onclick="window.open(this.href, 'facebook-share', 'width=550,height=255');return false;">
+                <i class="fa fa-facebook"></i><span class="hidden">facebook</span>
+                </a>
+              
+            
+              
+            
+          </section>
+        </footer>
+        <div class="bottom-teaser cf">
+          <div class="isLeft">
+            <h5 class="index-headline featured"><span>Written by</span></h5>
+            <section class="author">
+              <div class="author-image" style="background-image: url(/assets/images/author.jpg)">Blog Logo</div>
+              <h4>Sandip Ransing</h4>
+              <p class="bio"></p>
+              <hr>
+              <p class="published">Published <time datetime="2009-05-22 19:58">22 May 2009</time></p>
+            </section>
+          </div>
+          
+          <div class="isRight">
+            <h5 class="index-headline featured"><span>Supported by</span></h5>
+            <footer class="site-footer">
+              <section class="poweredby">Proudly published with <a href="http://jekyllrb.com"> Jekyll</a></section>
+              <a class="subscribe" href="/feed.xml"> <span class="tooltip"> <i class="fa fa-rss"></i> You should subscribe to my feed.</span></a>
+              <div class="inner">
+                <section class="copyright">All content copyright <a href="/">Sandip Ransing</a> &copy; 2016<br>All rights reserved.</section>
+              </div>
+            </footer>
+          </div>
+        </div>
+        
+      </article>
+    </main>
+    <div class="bottom-closer">
+      <div class="background-closer-image"  style="background-image: url()">
+        Image
+      </div>
+      <div class="inner">
+        <h1 class="blog-title">Fun On Rails</h1>
+        <h2 class="blog-description">Journal of a Web Developer #ruby #rails #JS 
+</h2>
+        <a href="/" class="btn">Back to Overview</a>
+      </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
+<script type="text/javascript" src="/assets/js/jquery.fitvids.js"></script>
+<script type="text/javascript" src="/assets/js/index.js"></script>
+<script type="text/javascript" src="/assets/js/readingTime.min.js"></script>
+<script>
+(function ($) {
+  "use strict";
+  $(document).ready(function(){
+
+    var $window = $(window),
+    $image = $('.post-image-image, .teaserimage-image');
+    
+      $window.on('scroll', function() {
+        var top = $window.scrollTop();
+
+        if (top < 0 || top > 1500) { return; }
+        $image
+          .css('transform', 'translate3d(0px, '+top/3+'px, 0px)')
+          .css('opacity', 1-Math.max(top/700, 0));
+      });
+      $window.trigger('scroll');
+
+      var height = $('.article-image').height();
+      $('.post-content').css('padding-top', height + 'px');
+
+      $('a[href*=#]:not([href=#])').click(function() {
+        if (location.pathname.replace(/^\//,'') == this.pathname.replace(/^\//,'')
+         && location.hostname == this.hostname) {
+          var target = $(this.hash);
+          target = target.length ? target : $('[name=' + this.hash.slice(1) +']');
+          if (target.length) {
+            $('html,body').animate({ scrollTop: target.offset().top }, 500);
+            return false;
+          }
+        }
+      });
+
+  });
+}(jQuery));
+</script>
+    
+  </body>
+</html>

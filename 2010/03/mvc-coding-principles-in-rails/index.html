@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <meta charset="utf-8">
+  <!-- (1) Optimize for mobile versions: http://goo.gl/EOpFl -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- (1) force latest IE rendering engine: bit.ly/1c8EiC9 -->
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+  <title>MVC coding principles in rails</title>
+  <meta name="description" content="I believe this post should clear basic coding standards before getting started with rails development.I just came with conversion started for declaring variables on rubyonrailstalk google group and..." />
+
+  <meta name="HandheldFriendly" content="True" />
+  <meta name="MobileOptimized" content="320" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:site" content="@sandipransing" />
+    <meta name="twitter:title" content="MVC coding principles in rails" />
+    <meta name="twitter:image" content="http://funonrails.com/assets/images/for_logo.png" />
+    
+    <meta name="twitter:description"  content="I believe this post should clear basic coding standards before getting started with rails development.I just came with conversion started for declaring variables on rubyonrailstalk google group and..." />
+    
+  
+  
+  <meta property="og:site_name" content="Fun On Rails" />
+  <meta property="og:title" content="MVC coding principles in rails"/>
+  
+  <meta property="og:description" content="I believe this post should clear basic coding standards before getting started with rails development.I just came with conversion started for declaring variables on rubyonrailstalk google group and..." />
+  
+  <meta property="og:image" content="http://funonrails.com/assets/images/for_logo.png" />
+  <meta property="og:url" content="http://funonrails.com/2010/03/mvc-coding-principles-in-rails" >
+  <meta property="og:type" content="blog" />
+  <meta property="article:published_time" content="2010-03-13T05:26:00+05:30">
+
+  <link rel="canonical" href="http://funonrails.com/2010/03/mvc-coding-principles-in-rails"/>
+  <link rel="shortcut icon" href="/assets/images/favicon.png" type="image/png"/>
+  <link rel="stylesheet" href="//brick.a.ssl.fastly.net/Linux+Libertine:400,400i,700,700i/Open+Sans:400,400i,700,700i">
+  <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+
+  <link rel="stylesheet" type="text/css" media="screen" href="/css/main.css" />
+  <link rel="stylesheet" type="text/css" media="print" href="/css/print.css" />
+</head>
+  <body itemscope itemtype="http://schema.org/Article">
+    <!-- header start -->
+
+<a href="http://funonrails.com" class="logo-readium"><span class="logo" style="background-image: url(/assets/images/for_logo.png)"></span></a>
+
+<!-- header end -->
+    <main class="content" role="main">
+      <article class="post">
+        
+        <div class="noarticleimage">
+          <div class="post-meta">
+            <h1 class="post-title">MVC coding principles in rails</h1>
+            <div class="cf post-meta-text">
+              <div class="author-image" style="background-image: url(/assets/images/author.jpg)">Blog Logo</div>
+              <h4 class="author-name" itemprop="author" itemscope itemtype="http://schema.org/Person"></h4>
+              on
+              <time datetime="2010-03-13T05:26:00+05:30">13 Mar 2010</time>
+              <!-- , tagged on <span class="post-tag-">, <a href="/tag/"></a></span> -->
+            </div>
+          </div>
+        </div>
+        <br>
+        <br>
+        <br>
+        
+        <section class="post-content">
+          <div class="post-reading">
+            <span class="post-reading-time"></span> read
+          </div>
+          <a name="topofpage"></a>
+          <p>I believe this post should clear basic coding standards before getting started with rails development.</p>
+
+<p>I just came with conversion started for declaring variables on rubyonrailstalk google group and that ended up with exploring the concepts of rails MVC coding principles.<br />
+so, i thought it would be nice if they gets summarized somewhere.</p>
+
+<p>The question raised was:</p>
+
+<figure class="quote"><blockquote><p>How to declare variables like arrays so that they are available everytime that layout or its related partials are used. Putting <code>@myarray = MyArray.all</code> into every action in every controller doesn’t seem very dry, so I guess I’m just looking for a very simple straighforward convention, but can’t seem to find it documented anywhere or figure it out</p></blockquote><figcaption class="quote-source"><span class="quote-author">@capsized </span></figcaption></figure>
+
+<p>Before getting into actual conversion, I would like to notedown what rails is.</p>
+
+<blockquote>
+  <p>Rails is web framework developed in ruby language. The main purpose behind is to make programmers life easy and development would be a fun. It is  built over MVC framework and philosophy includes DRY, Convention over configuration and REST. </p>
+</blockquote>
+
+<p>Adding conversation as it is here:</p>
+
+<figure class="quote"><blockquote><p>Noria Normally something like that goes into a high-level filter, like one  in ApplicationController.</p></blockquote><figcaption class="quote-source"><span class="quote-author">@Xavier  </span></figcaption></figure>
+
+<p>Put a before_filter in your ApplicationController. </p>
+
+<figure class="code-highlight-figure"><figcaption class="code-highlight-caption"><span class="code-highlight-caption-title">@Andy</span></figcaption><div class="code-highlight"><pre class="code-highlight-pre"><div data-line="1" class="code-highlight-row numbered"><div class="code-highlight-line"><span class="k">class</span> <span class="nc">ApplicationController</span> 
+</div></div><div data-line="2" class="code-highlight-row numbered"><div class="code-highlight-line">  <span class="n">before_filter</span> <span class="ss">:set_my_array</span>
+</div></div><div data-line="3" class="code-highlight-row numbered"><div class="code-highlight-line">  <span class="kp">private</span>
+</div></div><div data-line="4" class="code-highlight-row numbered"><div class="code-highlight-line">  <span class="k">def</span> <span class="nf">set_my_array</span>
+</div></div><div data-line="5" class="code-highlight-row numbered"><div class="code-highlight-line">    <span class="vi">@myarray</span> <span class="o">=</span> <span class="no">MyArray</span><span class="o">.</span><span class="n">all</span>
+</div></div><div data-line="6" class="code-highlight-row numbered"><div class="code-highlight-line">  <span class="k">end</span>
+</div></div><div data-line="7" class="code-highlight-row numbered"><div class="code-highlight-line"><span class="k">end</span></div></div></pre></div></figure>
+
+<figure class="quote"><blockquote><p>If it is literally something as simple as MyArray.all I believe there<br />
+is nothing wrong with calling the model direct from the view.</p></blockquote><figcaption class="quote-source"><span class="quote-author">@Colin </span></figcaption></figure>
+
+<p>And here started the debate conversation. First of all, i was also convinced with this suggestion but next reply started conversion.</p>
+
+<figure class="quote"><blockquote><p>It’s dirty, horrible, bad form, breaks the separation of layers…<br />
+Don’t call the model from the view!</p></blockquote><figcaption class="quote-source"><span class="quote-author">@Andy </span></figcaption></figure>
+
+<figure class="quote"><blockquote><p>Beware of the MVC police Colin, this suggestion will certanly not get<br />
+good housekeeping seal of approval :D<br />
+I agree through. I’m not gonna add a before filter just to set<br />
+MyArray.all into a class variable. I’d rather call it directly and claim<br />
+to be pragmatic.</p></blockquote><figcaption class="quote-source"><span class="quote-author">@Sharagoz </span></figcaption></figure>
+
+<figure class="quote"><blockquote><p>But you are wrong.  The view should never, ever, ever touch the database.<br />
+Claim all you like.  The fact is that in MVC architecture, database<br />
+queries don’t belong in the view. A before_filter is the proper place for this.</p></blockquote><figcaption class="quote-source"><span class="quote-author">@Marnen </span></figcaption></figure>
+
+<figure class="quote"><blockquote><p>Is it considered ok to call model methods if they do not touch the db,<br />
+or are model methods forbidden also?</p></blockquote><figcaption class="quote-source"><span class="quote-author">@Colin </span></figcaption></figure>
+
+<figure class="quote"><blockquote><p>I would say the view can call instance methods of the model (attributes - real and virtual) but no class methods. So: is OK, but:<br />
+is not.  It’s a bit of a contrived example, but there you go.  Accessing the model through instance variables you’ve created is OK, going directly to the model bypassing the controller is not.</p></blockquote><figcaption class="quote-source"><span class="quote-author">@Andy </span></figcaption></figure>
+
+<p>I think it is appropriate for the view to call methods on the objects passed in by the controller, provided that these methods do not change the model or touch the database.<br />
+Example:<br />
+<figure class="code-highlight-figure">&lt;figcaption class='code-highlight-caption'&gt;<span class="code-highlight-caption-title">Good: @Marnen</span>&lt;/figcaption&gt;&lt;div class='code-highlight'&gt;&lt;pre class='code-highlight-pre'&gt;&lt;div data-line='1' class='code-highlight-row numbered'&gt;&lt;div class='code-highlight-line'&gt;<span class="c1"># controller</span>
+&lt;/div&gt;&lt;/div&gt;&lt;div data-line='2' class='code-highlight-row numbered'&gt;&lt;div class='code-highlight-line'&gt;<span class="k">def</span> <span class="nf">my_action</span>
+&lt;/div&gt;&lt;/div&gt;&lt;div data-line='3' class='code-highlight-row numbered'&gt;&lt;div class='code-highlight-line'&gt; <span class="vi">@person</span> <span class="o">=</span> <span class="no">Person</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="n">params</span><span class="o">[</span><span class="ss">:id</span><span class="o">]</span><span class="p">)</span>
+&lt;/div&gt;&lt;/div&gt;&lt;div data-line='4' class='code-highlight-row numbered'&gt;&lt;div class='code-highlight-line'&gt;<span class="k">end</span>
+&lt;/div&gt;&lt;/div&gt;&lt;div data-line='5' class='code-highlight-row numbered'&gt;&lt;div class='code-highlight-line'&gt;<span class="c1">#my_action.html.erb</span>&lt;/div&gt;&lt;/div&gt;&lt;/pre&gt;&lt;/div&gt;</figure></p>
+
+<p>Here started conclusion on topic:<br />
+<figure class="quote">&lt;blockquote&gt;&lt;p&gt;Good example. I just want to throw in a couple more twists and see what<br />
+you think.<br />
+1.  What about methods on models that change themselves in some way?<br />
+Suppose the last_viewed_at method returned a previously stored time,<br />
+then updated the model to store a new current time. Maybe a bad example,<br />
+but I hope you get my meaning.<br />
+2.  What about aggregating class methods like count, sum or avg?<br />
+Obviously a class methods and does touch the database. I assume it would<br />
+be better to let the controller deal with stuff like this.<br />
+<figure class="code-highlight-figure">&lt;div class=’code-highlight’&gt;&lt;pre class=’code-highlight-pre’&gt;&lt;div data-line=’1’ class=’code-highlight-row numbered’&gt;&lt;div class=’code-highlight-line’&gt;<span class="c1"># Controller</span>
+&lt;/div&gt;&lt;/div&gt;&lt;div data-line=’2’ class=’code-highlight-row numbered’&gt;&lt;div class=’code-highlight-line’&gt; <span class="vi">@person_count</span> <span class="o">=</span> <span class="no">Person</span><span class="o">.</span><span class="n">count</span>&lt;/div&gt;&lt;/div&gt;&lt;/pre&gt;&lt;/div&gt;</figure>&lt;/p&gt;&lt;/blockquote&gt;&lt;figcaption class='quote-source'&gt;<span class="quote-author">@Robert </span>&lt;/figcaption&gt;</figure></p>
+
+<figure class="quote"><blockquote><p>I don’t know what you mean by dirty, it saves several lines of code<br />
+and when looking at the view code it is easier to see what is<br />
+happening than to see a variable that has to be hunted for in a filter<br />
+somewhere to find out what it is.<br />
+It does not break the separation of layers any more than calling an<br />
+instance method of a model does when using something like &gt; Don’t call the model from the view!<br />
+<code>@person.name</code> is a model call from the view</p></blockquote><figcaption class="quote-source"><span class="quote-author">@Colin </span></figcaption></figure>
+
+<figure class="quote"><blockquote><p>But think how many lines of code you are going to have to go edit when you realize that you need to change it. <br />
+Also, I wouldn’t consider Person.all to be more clean than @people. What if you need to exclude some? Person.all :conditions =&gt; {whatever}, if you are just using a before filter, it is easy to override, you can override it for any given controller, and for any given controller method. If it’s hard coded into the view, then that view has to serve everybody’s wishes, it ends up having to know how it is to be used, and having lots of brittle conditional code for each of these situations.<br />
+This is why the controller must be responsible for supplying the appropriate data to the view, not the view being responsible for creating it’s own data. <br />
+It might start as innocently as <code>Person.all</code>, it can easily turn into<br />
+<figure class="code-highlight-figure">&lt;div class='code-highlight'&gt;&lt;pre class='code-highlight-pre'&gt;&lt;div data-line='1' class='code-highlight-row numbered'&gt;&lt;div class='code-highlight-line'&gt;<span class="k">if</span> <span class="n">this</span>
+&lt;/div&gt;&lt;/div&gt;&lt;div data-line='2' class='code-highlight-row numbered'&gt;&lt;div class='code-highlight-line'&gt;  <span class="no">Person</span><span class="o">.</span><span class="n">all</span>
+&lt;/div&gt;&lt;/div&gt;&lt;div data-line='3' class='code-highlight-row numbered'&gt;&lt;div class='code-highlight-line'&gt;<span class="k">elsif</span> <span class="n">that</span>
+&lt;/div&gt;&lt;/div&gt;&lt;div data-line='4' class='code-highlight-row numbered'&gt;&lt;div class='code-highlight-line'&gt;  <span class="no">OtherPerson</span><span class="o">.</span><span class="n">all</span>
+&lt;/div&gt;&lt;/div&gt;&lt;div data-line='5' class='code-highlight-row numbered'&gt;&lt;div class='code-highlight-line'&gt;<span class="k">else</span>
+&lt;/div&gt;&lt;/div&gt;&lt;div data-line='6' class='code-highlight-row numbered'&gt;&lt;div class='code-highlight-line'&gt;  <span class="no">Person</span><span class="o">.</span><span class="n">all</span> <span class="o">+</span> <span class="no">OtherPerson</span><span class="o">.</span><span class="n">all</span>
+&lt;/div&gt;&lt;/div&gt;&lt;div data-line='7' class='code-highlight-row numbered'&gt;&lt;div class='code-highlight-line'&gt;<span class="k">end</span>&lt;/div&gt;&lt;/div&gt;&lt;/pre&gt;&lt;/div&gt;</figure></p></blockquote><figcaption class="quote-source"><span class="quote-author">@Josh </span></figcaption></figure>
+
+<p>This took another turn in conversion -</p>
+
+<figure class="quote"><blockquote><p>Did you misunderstand my post?  I was arguing for putting it in a filter rather than in the view (hence saying the 4 lines of before_filter, private, def and end was worth it).<br />
+It sounds like - when you start with “But” - that you disagree, but the rest of your post seems to be arguing from the same side as my posts.</p></blockquote><figcaption class="quote-source"><span class="quote-author">@Andy </span></figcaption></figure>
+
+<p>And finally Colin ended up conversion with conclusion -</p>
+
+<blockquote><p>An excellent post if I may say so that brings out the salient points I think.  Can the issues be summarised as follows?<br />
+The controller should provide all the data that the view should display in instance variables (@person for example).<br />
+The view is expected to understand the structure of the objects and so can access attributes (virtual or otherwise) of the objects.<br />
+If the model needs to access the db in order to provide an attribute value, or accessing the attribute has some side effect that affects the db, then this is ok, providing the view does not ‘know’ that the side effect or db access is happening. (Not very well written but I hope you know what I mean).<br />
+The view must not call any method of the model who’s purpose is to perform an action rather than return a value.<br />
+The view should not make any explicit use of model classes.  For example there should be no reference to Person or any other model class </p></blockquote>
+
+        </section>
+        <footer class="post-footer">
+          <section class="share">
+            
+              
+                <a class="icon-twitter" href="http://twitter.com/share?text=MVC+coding+principles+in+rails&amp;url=http://funonrails.com/2010/03/mvc-coding-principles-in-rails"
+                  onclick="window.open(this.href, 'twitter-share', 'width=550,height=255');return false;">
+                <i class="fa fa-twitter"></i><span class="hidden">twitter</span>
+                </a>
+              
+            
+              
+                <a class="icon-facebook" href="https://www.facebook.com/sharer.php?t=MVC+coding+principles+in+rails&amp;u=http://funonrails.com/2010/03/mvc-coding-principles-in-rails"
+                  onclick="window.open(this.href, 'facebook-share', 'width=550,height=255');return false;">
+                <i class="fa fa-facebook"></i><span class="hidden">facebook</span>
+                </a>
+              
+            
+              
+            
+          </section>
+        </footer>
+        <div class="bottom-teaser cf">
+          <div class="isLeft">
+            <h5 class="index-headline featured"><span>Written by</span></h5>
+            <section class="author">
+              <div class="author-image" style="background-image: url(/assets/images/author.jpg)">Blog Logo</div>
+              <h4>Sandip Ransing</h4>
+              <p class="bio"></p>
+              <hr>
+              <p class="published">Published <time datetime="2010-03-13 05:26">13 Mar 2010</time></p>
+            </section>
+          </div>
+          
+          <div class="isRight">
+            <h5 class="index-headline featured"><span>Supported by</span></h5>
+            <footer class="site-footer">
+              <section class="poweredby">Proudly published with <a href="http://jekyllrb.com"> Jekyll</a></section>
+              <a class="subscribe" href="/feed.xml"> <span class="tooltip"> <i class="fa fa-rss"></i> You should subscribe to my feed.</span></a>
+              <div class="inner">
+                <section class="copyright">All content copyright <a href="/">Sandip Ransing</a> &copy; 2016<br>All rights reserved.</section>
+              </div>
+            </footer>
+          </div>
+        </div>
+        
+      </article>
+    </main>
+    <div class="bottom-closer">
+      <div class="background-closer-image"  style="background-image: url()">
+        Image
+      </div>
+      <div class="inner">
+        <h1 class="blog-title">Fun On Rails</h1>
+        <h2 class="blog-description">Journal of a Web Developer #ruby #rails #JS 
+</h2>
+        <a href="/" class="btn">Back to Overview</a>
+      </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
+<script type="text/javascript" src="/assets/js/jquery.fitvids.js"></script>
+<script type="text/javascript" src="/assets/js/index.js"></script>
+<script type="text/javascript" src="/assets/js/readingTime.min.js"></script>
+<script>
+(function ($) {
+  "use strict";
+  $(document).ready(function(){
+
+    var $window = $(window),
+    $image = $('.post-image-image, .teaserimage-image');
+    
+      $window.on('scroll', function() {
+        var top = $window.scrollTop();
+
+        if (top < 0 || top > 1500) { return; }
+        $image
+          .css('transform', 'translate3d(0px, '+top/3+'px, 0px)')
+          .css('opacity', 1-Math.max(top/700, 0));
+      });
+      $window.trigger('scroll');
+
+      var height = $('.article-image').height();
+      $('.post-content').css('padding-top', height + 'px');
+
+      $('a[href*=#]:not([href=#])').click(function() {
+        if (location.pathname.replace(/^\//,'') == this.pathname.replace(/^\//,'')
+         && location.hostname == this.hostname) {
+          var target = $(this.hash);
+          target = target.length ? target : $('[name=' + this.hash.slice(1) +']');
+          if (target.length) {
+            $('html,body').animate({ scrollTop: target.offset().top }, 500);
+            return false;
+          }
+        }
+      });
+
+  });
+}(jQuery));
+</script>
+    
+  </body>
+</html>

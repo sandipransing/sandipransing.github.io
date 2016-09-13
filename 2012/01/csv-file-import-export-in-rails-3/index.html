@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <meta charset="utf-8">
+  <!-- (1) Optimize for mobile versions: http://goo.gl/EOpFl -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- (1) force latest IE rendering engine: bit.ly/1c8EiC9 -->
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+  <title>csv file import / export in rails 3</title>
+  <meta name="description" content="CSV (comma separated values) files are frequently used to import/export data. In rails 3, FasterCSV comes as default and below is the way to upload csv files inside rails applications. The code bel..." />
+
+  <meta name="HandheldFriendly" content="True" />
+  <meta name="MobileOptimized" content="320" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:site" content="@sandipransing" />
+    <meta name="twitter:title" content="csv file import / export in rails 3" />
+    <meta name="twitter:image" content="http://funonrails.com/assets/images/for_logo.png" />
+    
+    <meta name="twitter:description"  content="CSV (comma separated values) files are frequently used to import/export data. In rails 3, FasterCSV comes as default and below is the way to upload csv files inside rails applications. The code bel..." />
+    
+  
+  
+  <meta property="og:site_name" content="Fun On Rails" />
+  <meta property="og:title" content="csv file import / export in rails 3"/>
+  
+  <meta property="og:description" content="CSV (comma separated values) files are frequently used to import/export data. In rails 3, FasterCSV comes as default and below is the way to upload csv files inside rails applications. The code bel..." />
+  
+  <meta property="og:image" content="http://funonrails.com/assets/images/for_logo.png" />
+  <meta property="og:url" content="http://funonrails.com/2012/01/csv-file-import-export-in-rails-3" >
+  <meta property="og:type" content="blog" />
+  <meta property="article:published_time" content="2012-01-27T14:28:00+05:30">
+
+  <link rel="canonical" href="http://funonrails.com/2012/01/csv-file-import-export-in-rails-3"/>
+  <link rel="shortcut icon" href="/assets/images/favicon.png" type="image/png"/>
+  <link rel="stylesheet" href="//brick.a.ssl.fastly.net/Linux+Libertine:400,400i,700,700i/Open+Sans:400,400i,700,700i">
+  <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+
+  <link rel="stylesheet" type="text/css" media="screen" href="/css/main.css" />
+  <link rel="stylesheet" type="text/css" media="print" href="/css/print.css" />
+</head>
+  <body itemscope itemtype="http://schema.org/Article">
+    <!-- header start -->
+
+<a href="http://funonrails.com" class="logo-readium"><span class="logo" style="background-image: url(/assets/images/for_logo.png)"></span></a>
+
+<!-- header end -->
+    <main class="content" role="main">
+      <article class="post">
+        
+        <div class="noarticleimage">
+          <div class="post-meta">
+            <h1 class="post-title">csv file import / export in rails 3</h1>
+            <div class="cf post-meta-text">
+              <div class="author-image" style="background-image: url(/assets/images/author.jpg)">Blog Logo</div>
+              <h4 class="author-name" itemprop="author" itemscope itemtype="http://schema.org/Person"></h4>
+              on
+              <time datetime="2012-01-27T14:28:00+05:30">27 Jan 2012</time>
+              <!-- , tagged on <span class="post-tag-">, <a href="/tag/"></a></span> -->
+            </div>
+          </div>
+        </div>
+        <br>
+        <br>
+        <br>
+        
+        <section class="post-content">
+          <div class="post-reading">
+            <span class="post-reading-time"></span> read
+          </div>
+          <a name="topofpage"></a>
+          <p>CSV (comma separated values) files are frequently used to import/export data. </p>
+
+<p>In rails 3, <code>FasterCSV</code> comes as default and below is the way to upload csv files inside rails applications. The code below will also show you how to generate csv in memory, parse on csv data, skip header, iterate over records, save records inside db, export upload error file and many more. </p>
+
+<h4 id="upload-form">Upload form</h4>
+
+<figure class="code-highlight-figure"><div class="code-highlight"><pre class="code-highlight-pre"><div data-line="1" class="code-highlight-row numbered"><div class="code-highlight-line"><span class="p">=</span> <span class="n">form_tag</span> <span class="n">upload_url</span><span class="p">,</span> <span class="ss">:multipart</span> <span class="o">=&gt;</span> <span class="kp">true</span> <span class="k">do</span>
+</div></div><div data-line="2" class="code-highlight-row numbered"><div class="code-highlight-line">  <span class="nt">%label</span><span class="p">&#x7b;</span><span class="ss">:for</span> <span class="o">=&gt;</span> <span class="s2">&quot;file&quot;</span><span class="p">&#x7d;</span> File to Upload
+</div></div><div data-line="3" class="code-highlight-row numbered"><div class="code-highlight-line">  <span class="p">=</span> <span class="n">file_field_tag</span> <span class="s2">&quot;file&quot;</span>
+</div></div><div data-line="4" class="code-highlight-row numbered"><div class="code-highlight-line">  <span class="p">=</span> <span class="n">submit_tag</span></div></div></pre></div></figure>
+
+<!--more-->
+<p>Assume <code>upload_url</code> maps to import action of customers controller </p>
+
+<h4 id="controller-code">Controller code</h4>
+
+<figure class="code-highlight-figure"><div class="code-highlight"><pre class="code-highlight-pre"><div data-line="1" class="code-highlight-row numbered"><div class="code-highlight-line"><span class="k">class</span> <span class="nc">CustomersController</span> <span class="o">&lt;</span> <span class="no">ApplicationController</span>  
+</div></div><div data-line="2" class="code-highlight-row numbered"><div class="code-highlight-line">  <span class="o">[.</span><span class="n">.</span><span class="o">.]</span> 
+</div></div><div data-line="3" class="code-highlight-row numbered"><div class="code-highlight-line">  <span class="k">def</span> <span class="nf">import</span>
+</div></div><div data-line="4" class="code-highlight-row numbered"><div class="code-highlight-line">    <span class="k">if</span> <span class="n">request</span><span class="o">.</span><span class="n">post?</span> <span class="o">&amp;&amp;</span> <span class="n">params</span><span class="o">[</span><span class="ss">:file</span><span class="o">].</span><span class="n">present?</span>
+</div></div><div data-line="5" class="code-highlight-row numbered"><div class="code-highlight-line">      <span class="n">infile</span> <span class="o">=</span> <span class="n">params</span><span class="o">[</span><span class="ss">:file</span><span class="o">].</span><span class="n">read</span>
+</div></div><div data-line="6" class="code-highlight-row numbered"><div class="code-highlight-line">      <span class="n">n</span><span class="p">,</span> <span class="n">errs</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="o">[]</span>
+</div></div><div data-line="7" class="code-highlight-row numbered"><div class="code-highlight-line"> </div></div><div data-line="8" class="code-highlight-row numbered"><div class="code-highlight-line">      <span class="no">CSV</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="n">infile</span><span class="p">)</span> <span class="k">do</span> <span class="o">|</span><span class="n">row</span><span class="o">|</span>
+</div></div><div data-line="9" class="code-highlight-row numbered"><div class="code-highlight-line">        <span class="n">n</span> <span class="o">+=</span> <span class="mi">1</span>
+</div></div><div data-line="10" class="code-highlight-row numbered"><div class="code-highlight-line">        <span class="c1"># SKIP: header i.e. first row OR blank row</span>
+</div></div><div data-line="11" class="code-highlight-row numbered"><div class="code-highlight-line">        <span class="k">next</span> <span class="k">if</span> <span class="n">n</span> <span class="o">==</span> <span class="mi">1</span> <span class="ow">or</span> <span class="n">row</span><span class="o">.</span><span class="n">join</span><span class="o">.</span><span class="n">blank?</span>
+</div></div><div data-line="12" class="code-highlight-row numbered"><div class="code-highlight-line">        <span class="c1"># build_from_csv method will map customer attributes &amp; </span>
+</div></div><div data-line="13" class="code-highlight-row numbered"><div class="code-highlight-line">        <span class="c1"># build new customer record</span>
+</div></div><div data-line="14" class="code-highlight-row numbered"><div class="code-highlight-line">        <span class="n">customer</span> <span class="o">=</span> <span class="no">Customer</span><span class="o">.</span><span class="n">build_from_csv</span><span class="p">(</span><span class="n">row</span><span class="p">)</span>
+</div></div><div data-line="15" class="code-highlight-row numbered"><div class="code-highlight-line">        <span class="c1"># Save upon valid </span>
+</div></div><div data-line="16" class="code-highlight-row numbered"><div class="code-highlight-line">        <span class="c1"># otherwise collect error records to export</span>
+</div></div><div data-line="17" class="code-highlight-row numbered"><div class="code-highlight-line">        <span class="k">if</span> <span class="n">customer</span><span class="o">.</span><span class="n">valid?</span>
+</div></div><div data-line="18" class="code-highlight-row numbered"><div class="code-highlight-line">          <span class="n">customer</span><span class="o">.</span><span class="n">save</span>
+</div></div><div data-line="19" class="code-highlight-row numbered"><div class="code-highlight-line">        <span class="k">else</span>
+</div></div><div data-line="20" class="code-highlight-row numbered"><div class="code-highlight-line">          <span class="n">errs</span> <span class="o">&lt;&lt;</span> <span class="n">row</span>
+</div></div><div data-line="21" class="code-highlight-row numbered"><div class="code-highlight-line">        <span class="k">end</span>
+</div></div><div data-line="22" class="code-highlight-row numbered"><div class="code-highlight-line">      <span class="k">end</span>
+</div></div><div data-line="23" class="code-highlight-row numbered"><div class="code-highlight-line">      <span class="c1"># Export Error file for later upload upon correction</span>
+</div></div><div data-line="24" class="code-highlight-row numbered"><div class="code-highlight-line">      <span class="k">if</span> <span class="n">errs</span><span class="o">.</span><span class="n">any?</span>
+</div></div><div data-line="25" class="code-highlight-row numbered"><div class="code-highlight-line">        <span class="n">errFile</span> <span class="o">=</span><span class="s2">&quot;errors_</span><span class="si">#&#x7b;</span><span class="no">Date</span><span class="o">.</span><span class="n">today</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s1">&#39;%d%b%y&#39;</span><span class="p">)</span><span class="si">&#x7d;</span><span class="s2">.csv&quot;</span>
+</div></div><div data-line="26" class="code-highlight-row numbered"><div class="code-highlight-line">        <span class="n">errs</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="no">Customer</span><span class="o">.</span><span class="n">csv_header</span><span class="p">)</span>
+</div></div><div data-line="27" class="code-highlight-row numbered"><div class="code-highlight-line">        <span class="n">errCSV</span> <span class="o">=</span> <span class="no">CSV</span><span class="o">.</span><span class="n">generate</span> <span class="k">do</span> <span class="o">|</span><span class="n">csv</span><span class="o">|</span>
+</div></div><div data-line="28" class="code-highlight-row numbered"><div class="code-highlight-line">          <span class="n">errs</span><span class="o">.</span><span class="n">each</span> <span class="p">&#x7b;</span><span class="o">|</span><span class="n">row</span><span class="o">|</span> <span class="n">csv</span> <span class="o">&lt;&lt;</span> <span class="n">row</span><span class="p">&#x7d;</span>
+</div></div><div data-line="29" class="code-highlight-row numbered"><div class="code-highlight-line">        <span class="k">end</span>
+</div></div><div data-line="30" class="code-highlight-row numbered"><div class="code-highlight-line">        <span class="n">send_data</span> <span class="n">errCSV</span><span class="p">,</span>
+</div></div><div data-line="31" class="code-highlight-row numbered"><div class="code-highlight-line">          <span class="ss">:type</span> <span class="o">=&gt;</span> <span class="s1">&#39;text/csv; charset=iso-8859-1; header=present&#39;</span><span class="p">,</span>
+</div></div><div data-line="32" class="code-highlight-row numbered"><div class="code-highlight-line">          <span class="ss">:disposition</span> <span class="o">=&gt;</span> <span class="s2">&quot;attachment; filename=</span><span class="si">#&#x7b;</span><span class="n">errFile</span><span class="si">&#x7d;</span><span class="s2">.csv&quot;</span>
+</div></div><div data-line="33" class="code-highlight-row numbered"><div class="code-highlight-line">      <span class="k">else</span>
+</div></div><div data-line="34" class="code-highlight-row numbered"><div class="code-highlight-line">        <span class="n">flash</span><span class="o">[</span><span class="ss">:notice</span><span class="o">]</span> <span class="o">=</span> <span class="no">I18n</span><span class="o">.</span><span class="n">t</span><span class="p">(</span><span class="s1">&#39;customer.import.success&#39;</span><span class="p">)</span>
+</div></div><div data-line="35" class="code-highlight-row numbered"><div class="code-highlight-line">        <span class="n">redirect_to</span> <span class="n">import_url</span> <span class="c1">#GET</span>
+</div></div><div data-line="36" class="code-highlight-row numbered"><div class="code-highlight-line">      <span class="k">end</span>
+</div></div><div data-line="37" class="code-highlight-row numbered"><div class="code-highlight-line">    <span class="k">end</span>
+</div></div><div data-line="38" class="code-highlight-row numbered"><div class="code-highlight-line">  <span class="k">end</span>
+</div></div><div data-line="39" class="code-highlight-row numbered"><div class="code-highlight-line">  <span class="o">[.</span><span class="n">.</span><span class="o">.]</span>
+</div></div><div data-line="40" class="code-highlight-row numbered"><div class="code-highlight-line"><span class="k">end</span></div></div></pre></div></figure>
+
+<h4 id="customer-model">Customer model</h4>
+
+<figure class="code-highlight-figure"><div class="code-highlight"><pre class="code-highlight-pre"><div data-line="1" class="code-highlight-row numbered"><div class="code-highlight-line"><span class="k">class</span> <span class="nc">Customer</span> <span class="o">&lt;</span> <span class="no">ActiveRecord</span><span class="o">::</span><span class="no">Base</span>
+</div></div><div data-line="2" class="code-highlight-row numbered"><div class="code-highlight-line">  <span class="n">scope</span> <span class="ss">:active</span><span class="p">,</span> <span class="n">where</span><span class="p">(</span><span class="ss">:active</span> <span class="o">=&gt;</span> <span class="kp">true</span><span class="p">)</span>
+</div></div><div data-line="3" class="code-highlight-row numbered"><div class="code-highlight-line">  <span class="n">scope</span> <span class="ss">:latest</span><span class="p">,</span> <span class="n">order</span><span class="p">(</span><span class="s1">&#39;created_at desc&#39;</span><span class="p">)</span>
+</div></div><div data-line="4" class="code-highlight-row numbered"><div class="code-highlight-line"> </div></div><div data-line="5" class="code-highlight-row numbered"><div class="code-highlight-line">  <span class="k">def</span> <span class="nc">self</span><span class="o">.</span><span class="nf">csv_header</span>
+</div></div><div data-line="6" class="code-highlight-row numbered"><div class="code-highlight-line">    <span class="s2">&quot;First Name,Last Name,Email,Phone,Mobile, Address, FAX, City&quot;</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;,&#39;</span><span class="p">)</span>
+</div></div><div data-line="7" class="code-highlight-row numbered"><div class="code-highlight-line">  <span class="k">end</span>
+</div></div><div data-line="8" class="code-highlight-row numbered"><div class="code-highlight-line"> </div></div><div data-line="9" class="code-highlight-row numbered"><div class="code-highlight-line">  <span class="k">def</span> <span class="nc">self</span><span class="o">.</span><span class="nf">build_from_csv</span><span class="p">(</span><span class="n">row</span><span class="p">)</span>
+</div></div><div data-line="10" class="code-highlight-row numbered"><div class="code-highlight-line">    <span class="c1"># find existing customer from email or create new</span>
+</div></div><div data-line="11" class="code-highlight-row numbered"><div class="code-highlight-line">    <span class="n">cust</span> <span class="o">=</span> <span class="n">find_or_initialize_by_email</span><span class="p">(</span><span class="n">row</span><span class="o">[</span><span class="mi">2</span><span class="o">]</span><span class="p">)</span>
+</div></div><div data-line="12" class="code-highlight-row numbered"><div class="code-highlight-line">    <span class="n">cust</span><span class="o">.</span><span class="n">attributes</span> <span class="o">=</span><span class="p">&#x7b;</span><span class="ss">:first_name</span> <span class="o">=&gt;</span> <span class="n">row</span><span class="o">[</span><span class="mi">0</span><span class="o">]</span><span class="p">,</span>
+</div></div><div data-line="13" class="code-highlight-row numbered"><div class="code-highlight-line">      <span class="ss">:last_name</span> <span class="o">=&gt;</span> <span class="n">row</span><span class="o">[</span><span class="mi">1</span><span class="o">]</span><span class="p">,</span>
+</div></div><div data-line="14" class="code-highlight-row numbered"><div class="code-highlight-line">      <span class="ss">:email</span> <span class="o">=&gt;</span> <span class="n">row</span><span class="o">[</span><span class="mi">3</span><span class="o">]</span><span class="p">,</span>
+</div></div><div data-line="15" class="code-highlight-row numbered"><div class="code-highlight-line">      <span class="ss">:phone</span> <span class="o">=&gt;</span> <span class="n">row</span><span class="o">[</span><span class="mi">4</span><span class="o">]</span><span class="p">,</span>
+</div></div><div data-line="16" class="code-highlight-row numbered"><div class="code-highlight-line">      <span class="ss">:mobile</span> <span class="o">=&gt;</span> <span class="n">row</span><span class="o">[</span><span class="mi">5</span><span class="o">]</span><span class="p">,</span>
+</div></div><div data-line="17" class="code-highlight-row numbered"><div class="code-highlight-line">      <span class="ss">:address</span> <span class="o">=&gt;</span> <span class="n">row</span><span class="o">[</span><span class="mi">6</span><span class="o">]</span><span class="p">,</span>
+</div></div><div data-line="18" class="code-highlight-row numbered"><div class="code-highlight-line">      <span class="ss">:fax</span> <span class="o">=&gt;</span> <span class="n">row</span><span class="o">[</span><span class="mi">7</span><span class="o">]</span><span class="p">,</span>
+</div></div><div data-line="19" class="code-highlight-row numbered"><div class="code-highlight-line">      <span class="ss">:city</span> <span class="o">=&gt;</span> <span class="n">row</span><span class="o">[</span><span class="mi">8</span><span class="o">]</span><span class="p">&#x7d;</span>
+</div></div><div data-line="20" class="code-highlight-row numbered"><div class="code-highlight-line">    <span class="k">return</span> <span class="n">cust</span>
+</div></div><div data-line="21" class="code-highlight-row numbered"><div class="code-highlight-line">  <span class="k">end</span>
+</div></div><div data-line="22" class="code-highlight-row numbered"><div class="code-highlight-line"> </div></div><div data-line="23" class="code-highlight-row numbered"><div class="code-highlight-line">  <span class="k">def</span> <span class="nf">to_csv</span>
+</div></div><div data-line="24" class="code-highlight-row numbered"><div class="code-highlight-line">    <span class="o">[</span><span class="n">first_name</span><span class="p">,</span> <span class="n">last_name</span><span class="p">,</span> <span class="n">email</span><span class="p">,</span> <span class="n">phone</span><span class="p">,</span> <span class="n">mobile</span><span class="p">,</span> <span class="n">address</span><span class="p">,</span> <span class="n">fax</span><span class="p">,</span> <span class="n">city</span><span class="o">]</span>
+</div></div><div data-line="25" class="code-highlight-row numbered"><div class="code-highlight-line">  <span class="k">end</span>
+</div></div><div data-line="26" class="code-highlight-row numbered"><div class="code-highlight-line"><span class="k">end</span></div></div></pre></div></figure>
+
+<h2 id="export-customer-records-in-csv-format">Export customer records in CSV format</h2>
+
+<p>Below code loads customer records from database then generate <code>csv_data</code> inside memory and exports data to browser using <code>send_data</code> method.</p>
+
+<p>Note: As we are not writing on file system hence code can easily work heroku.<br />
+<figure class="code-highlight-figure">&lt;div class='code-highlight'&gt;&lt;pre class='code-highlight-pre'&gt;&lt;div data-line='1' class='code-highlight-row numbered'&gt;&lt;div class='code-highlight-line'&gt;<span class="k">def</span> <span class="nf">export</span>
+&lt;/div&gt;&lt;/div&gt;&lt;div data-line='2' class='code-highlight-row numbered'&gt;&lt;div class='code-highlight-line'&gt;  <span class="c1"># CRITERIA : to select customer records</span>
+&lt;/div&gt;&lt;/div&gt;&lt;div data-line='3' class='code-highlight-row numbered'&gt;&lt;div class='code-highlight-line'&gt;  <span class="c1">#=&gt; Customer.active.latest.limit(100)</span>
+&lt;/div&gt;&lt;/div&gt;&lt;div data-line='4' class='code-highlight-row numbered'&gt;&lt;div class='code-highlight-line'&gt;  <span class="n">custs</span> <span class="o">=</span> <span class="no">Customer</span><span class="o">.</span><span class="n">limit</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+&lt;/div&gt;&lt;/div&gt;&lt;div data-line='5' class='code-highlight-row numbered'&gt;&lt;div class='code-highlight-line'&gt;  <span class="n">filename</span> <span class="o">=</span><span class="s2">"customers_</span><span class="si">#{</span><span class="no">Date</span><span class="o">.</span><span class="n">today</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s1">'%d%b%y'</span><span class="p">)</span><span class="si">}</span><span class="s2">"</span>
+&lt;/div&gt;&lt;/div&gt;&lt;div data-line='6' class='code-highlight-row numbered'&gt;&lt;div class='code-highlight-line'&gt;  <span class="n">csv_data</span> <span class="o">=</span> <span class="no">FasterCSV</span><span class="o">.</span><span class="n">generate</span> <span class="k">do</span> <span class="o">|</span><span class="n">csv</span><span class="o">|</span>
+&lt;/div&gt;&lt;/div&gt;&lt;div data-line='7' class='code-highlight-row numbered'&gt;&lt;div class='code-highlight-line'&gt;    <span class="n">csv</span> <span class="o">&lt;&lt;</span> <span class="no">Customer</span><span class="o">.</span><span class="n">csv_header</span>
+&lt;/div&gt;&lt;/div&gt;&lt;div data-line='8' class='code-highlight-row numbered'&gt;&lt;div class='code-highlight-line'&gt;    <span class="n">custs</span><span class="o">.</span><span class="n">each</span> <span class="k">do</span> <span class="o">|</span><span class="n">c</span><span class="o">|</span> 
+&lt;/div&gt;&lt;/div&gt;&lt;div data-line='9' class='code-highlight-row numbered'&gt;&lt;div class='code-highlight-line'&gt;      <span class="n">csv</span> <span class="o">&lt;&lt;</span> <span class="n">c</span><span class="o">.</span><span class="n">to_csv</span>
+&lt;/div&gt;&lt;/div&gt;&lt;div data-line='10' class='code-highlight-row numbered'&gt;&lt;div class='code-highlight-line'&gt;    <span class="k">end</span> 
+&lt;/div&gt;&lt;/div&gt;&lt;div data-line='11' class='code-highlight-row numbered'&gt;&lt;div class='code-highlight-line'&gt;  <span class="k">end</span> 
+&lt;/div&gt;&lt;/div&gt;&lt;div data-line='12' class='code-highlight-row numbered'&gt;&lt;div class='code-highlight-line'&gt;  <span class="n">send_data</span> <span class="n">csv_data</span><span class="p">,</span>
+&lt;/div&gt;&lt;/div&gt;&lt;div data-line='13' class='code-highlight-row numbered'&gt;&lt;div class='code-highlight-line'&gt;    <span class="ss">:type</span> <span class="o">=&gt;</span> <span class="s1">'text/csv; charset=iso-8859-1; header=present'</span><span class="p">,</span>
+&lt;/div&gt;&lt;/div&gt;&lt;div data-line='14' class='code-highlight-row numbered'&gt;&lt;div class='code-highlight-line'&gt;    <span class="ss">:disposition</span> <span class="o">=&gt;</span> <span class="s2">"attachment; filename=</span><span class="si">#{</span><span class="n">filename</span><span class="si">}</span><span class="s2">.csv"</span>
+&lt;/div&gt;&lt;/div&gt;&lt;div data-line='15' class='code-highlight-row numbered'&gt;&lt;div class='code-highlight-line'&gt;<span class="k">end</span>&lt;/div&gt;&lt;/div&gt;&lt;/pre&gt;&lt;/div&gt;</figure></p>
+
+
+        </section>
+        <footer class="post-footer">
+          <section class="share">
+            
+              
+                <a class="icon-twitter" href="http://twitter.com/share?text=csv+file+import+%2F+export+in+rails+3&amp;url=http://funonrails.com/2012/01/csv-file-import-export-in-rails-3"
+                  onclick="window.open(this.href, 'twitter-share', 'width=550,height=255');return false;">
+                <i class="fa fa-twitter"></i><span class="hidden">twitter</span>
+                </a>
+              
+            
+              
+                <a class="icon-facebook" href="https://www.facebook.com/sharer.php?t=csv+file+import+%2F+export+in+rails+3&amp;u=http://funonrails.com/2012/01/csv-file-import-export-in-rails-3"
+                  onclick="window.open(this.href, 'facebook-share', 'width=550,height=255');return false;">
+                <i class="fa fa-facebook"></i><span class="hidden">facebook</span>
+                </a>
+              
+            
+              
+            
+          </section>
+        </footer>
+        <div class="bottom-teaser cf">
+          <div class="isLeft">
+            <h5 class="index-headline featured"><span>Written by</span></h5>
+            <section class="author">
+              <div class="author-image" style="background-image: url(/assets/images/author.jpg)">Blog Logo</div>
+              <h4>Sandip Ransing</h4>
+              <p class="bio"></p>
+              <hr>
+              <p class="published">Published <time datetime="2012-01-27 14:28">27 Jan 2012</time></p>
+            </section>
+          </div>
+          
+          <div class="isRight">
+            <h5 class="index-headline featured"><span>Supported by</span></h5>
+            <footer class="site-footer">
+              <section class="poweredby">Proudly published with <a href="http://jekyllrb.com"> Jekyll</a></section>
+              <a class="subscribe" href="/feed.xml"> <span class="tooltip"> <i class="fa fa-rss"></i> You should subscribe to my feed.</span></a>
+              <div class="inner">
+                <section class="copyright">All content copyright <a href="/">Sandip Ransing</a> &copy; 2016<br>All rights reserved.</section>
+              </div>
+            </footer>
+          </div>
+        </div>
+        
+      </article>
+    </main>
+    <div class="bottom-closer">
+      <div class="background-closer-image"  style="background-image: url()">
+        Image
+      </div>
+      <div class="inner">
+        <h1 class="blog-title">Fun On Rails</h1>
+        <h2 class="blog-description">Journal of a Web Developer #ruby #rails #JS 
+</h2>
+        <a href="/" class="btn">Back to Overview</a>
+      </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
+<script type="text/javascript" src="/assets/js/jquery.fitvids.js"></script>
+<script type="text/javascript" src="/assets/js/index.js"></script>
+<script type="text/javascript" src="/assets/js/readingTime.min.js"></script>
+<script>
+(function ($) {
+  "use strict";
+  $(document).ready(function(){
+
+    var $window = $(window),
+    $image = $('.post-image-image, .teaserimage-image');
+    
+      $window.on('scroll', function() {
+        var top = $window.scrollTop();
+
+        if (top < 0 || top > 1500) { return; }
+        $image
+          .css('transform', 'translate3d(0px, '+top/3+'px, 0px)')
+          .css('opacity', 1-Math.max(top/700, 0));
+      });
+      $window.trigger('scroll');
+
+      var height = $('.article-image').height();
+      $('.post-content').css('padding-top', height + 'px');
+
+      $('a[href*=#]:not([href=#])').click(function() {
+        if (location.pathname.replace(/^\//,'') == this.pathname.replace(/^\//,'')
+         && location.hostname == this.hostname) {
+          var target = $(this.hash);
+          target = target.length ? target : $('[name=' + this.hash.slice(1) +']');
+          if (target.length) {
+            $('html,body').animate({ scrollTop: target.offset().top }, 500);
+            return false;
+          }
+        }
+      });
+
+  });
+}(jQuery));
+</script>
+    
+  </body>
+</html>

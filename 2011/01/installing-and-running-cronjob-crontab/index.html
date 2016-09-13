@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <meta charset="utf-8">
+  <!-- (1) Optimize for mobile versions: http://goo.gl/EOpFl -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- (1) force latest IE rendering engine: bit.ly/1c8EiC9 -->
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+  <title>Installing and running cronjob (crontab basics)</title>
+  <meta name="description" content="Basic handy commands while working with crontabsEditing cron filecrontab -eDisplaying cron filecrontab -lRemoving cron filecrontab -r## Cron syntax  cron command basically takes 6 input parameters ..." />
+
+  <meta name="HandheldFriendly" content="True" />
+  <meta name="MobileOptimized" content="320" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:site" content="@sandipransing" />
+    <meta name="twitter:title" content="Installing and running cronjob (crontab basics)" />
+    <meta name="twitter:image" content="http://funonrails.com/assets/images/for_logo.png" />
+    
+    <meta name="twitter:description"  content="Basic handy commands while working with crontabsEditing cron filecrontab -eDisplaying cron filecrontab -lRemoving cron filecrontab -r## Cron syntax  cron command basically takes 6 input parameters ..." />
+    
+  
+  
+  <meta property="og:site_name" content="Fun On Rails" />
+  <meta property="og:title" content="Installing and running cronjob (crontab basics)"/>
+  
+  <meta property="og:description" content="Basic handy commands while working with crontabsEditing cron filecrontab -eDisplaying cron filecrontab -lRemoving cron filecrontab -r## Cron syntax  cron command basically takes 6 input parameters ..." />
+  
+  <meta property="og:image" content="http://funonrails.com/assets/images/for_logo.png" />
+  <meta property="og:url" content="http://funonrails.com/2011/01/installing-and-running-cronjob-crontab" >
+  <meta property="og:type" content="blog" />
+  <meta property="article:published_time" content="2011-01-20T13:50:00+05:30">
+
+  <link rel="canonical" href="http://funonrails.com/2011/01/installing-and-running-cronjob-crontab"/>
+  <link rel="shortcut icon" href="/assets/images/favicon.png" type="image/png"/>
+  <link rel="stylesheet" href="//brick.a.ssl.fastly.net/Linux+Libertine:400,400i,700,700i/Open+Sans:400,400i,700,700i">
+  <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+
+  <link rel="stylesheet" type="text/css" media="screen" href="/css/main.css" />
+  <link rel="stylesheet" type="text/css" media="print" href="/css/print.css" />
+</head>
+  <body itemscope itemtype="http://schema.org/Article">
+    <!-- header start -->
+
+<a href="http://funonrails.com" class="logo-readium"><span class="logo" style="background-image: url(/assets/images/for_logo.png)"></span></a>
+
+<!-- header end -->
+    <main class="content" role="main">
+      <article class="post">
+        
+        <div class="noarticleimage">
+          <div class="post-meta">
+            <h1 class="post-title">Installing and running cronjob (crontab basics)</h1>
+            <div class="cf post-meta-text">
+              <div class="author-image" style="background-image: url(/assets/images/author.jpg)">Blog Logo</div>
+              <h4 class="author-name" itemprop="author" itemscope itemtype="http://schema.org/Person"></h4>
+              on
+              <time datetime="2011-01-20T13:50:00+05:30">20 Jan 2011</time>
+              <!-- , tagged on <span class="post-tag-">, <a href="/tag/"></a></span> -->
+            </div>
+          </div>
+        </div>
+        <br>
+        <br>
+        <br>
+        
+        <section class="post-content">
+          <div class="post-reading">
+            <span class="post-reading-time"></span> read
+          </div>
+          <a name="topofpage"></a>
+          <p>Basic handy commands while working with crontabs</p>
+
+<h2 id="editing-cron-file">Editing cron file</h2>
+<figure class="code-highlight-figure"><div class="code-highlight"><pre class="code-highlight-pre"><div data-line="1" class="code-highlight-row numbered"><div class="code-highlight-line">crontab -e</div></div></pre></div></figure>
+
+<h2 id="displaying-cron-file">Displaying cron file</h2>
+<figure class="code-highlight-figure"><div class="code-highlight"><pre class="code-highlight-pre"><div data-line="1" class="code-highlight-row numbered"><div class="code-highlight-line">crontab -l</div></div></pre></div></figure>
+
+<h2 id="removing-cron-file">Removing cron file</h2>
+<figure class="code-highlight-figure"><div class="code-highlight"><pre class="code-highlight-pre"><div data-line="1" class="code-highlight-row numbered"><div class="code-highlight-line">crontab -r</div></div></pre></div></figure>
+
+<h2 id="cron-syntax">Cron syntax</h2>
+
+<blockquote>
+  <p>cron command basically takes 6 input parameters of which each input can take multiple arguments for that one can make use of comma or pipe separator</p>
+</blockquote>
+
+<figure class="code-highlight-figure"><div class="code-highlight"><pre class="code-highlight-pre"><div data-line="1" class="code-highlight-row numbered"><div class="code-highlight-line"># min hour dom mon dow   command
+</div></div><div data-line="2" class="code-highlight-row numbered"><div class="code-highlight-line">*   *   *   *   * (command)</div></div></pre></div></figure>
+
+<p>Here * means for every. Above command will get executed for every minute</p>
+
+<h2 id="detail-syntax">Detail syntax</h2>
+<figure class="code-highlight-figure"><div class="code-highlight"><pre class="code-highlight-pre"><div data-line="1" class="code-highlight-row numbered"><div class="code-highlight-line">*     *     *   *    *        command to be executed
+</div></div><div data-line="2" class="code-highlight-row numbered"><div class="code-highlight-line">-     -     -   -    -
+</div></div><div data-line="3" class="code-highlight-row numbered"><div class="code-highlight-line">|     |     |   |    |
+</div></div><div data-line="4" class="code-highlight-row numbered"><div class="code-highlight-line">|     |     |   |    +----- day of week (0 - 6) (Sunday=0)
+</div></div><div data-line="5" class="code-highlight-row numbered"><div class="code-highlight-line">|     |     |   +------- month (1 - 12)
+</div></div><div data-line="6" class="code-highlight-row numbered"><div class="code-highlight-line">|     |     +--------- day of month (1 - 31)
+</div></div><div data-line="7" class="code-highlight-row numbered"><div class="code-highlight-line">|     +---------- hour (0 - 23)
+</div></div><div data-line="8" class="code-highlight-row numbered"><div class="code-highlight-line">+------- min (0 - 59)</div></div></pre></div></figure>
+
+<h2 id="example-commands">Example commands</h2>
+<figure class="code-highlight-figure"><div class="code-highlight"><pre class="code-highlight-pre"><div data-line="1" class="code-highlight-row numbered"><div class="code-highlight-line"># Generate progressive report for every active user at 11:45 p.m.
+</div></div><div data-line="2" class="code-highlight-row numbered"><div class="code-highlight-line">45 23 * * * (cd /home/sandip/current/; rake ace:daily_progressive_report RAILS_ENV=production)
+</div></div><div data-line="3" class="code-highlight-row numbered"><div class="code-highlight-line"> </div></div><div data-line="4" class="code-highlight-row numbered"><div class="code-highlight-line"># Take database backup every night
+</div></div><div data-line="5" class="code-highlight-row numbered"><div class="code-highlight-line">59 2 * * * (cd /home/sandip/current/; rake db:backup RAILS_ENV=production)
+</div></div><div data-line="6" class="code-highlight-row numbered"><div class="code-highlight-line"> </div></div><div data-line="7" class="code-highlight-row numbered"><div class="code-highlight-line"># Initialize grouping on database every sunday
+</div></div><div data-line="8" class="code-highlight-row numbered"><div class="code-highlight-line">29 3 * * 0 (cd /home/sandip/current/; rake ace:initializeCarGrouping RAILS_ENV=production)
+</div></div><div data-line="9" class="code-highlight-row numbered"><div class="code-highlight-line"> </div></div><div data-line="10" class="code-highlight-row numbered"><div class="code-highlight-line"># Generate daily stats on 4:30 AM &amp; 12:30 PM and 4:30 PM
+</div></div><div data-line="11" class="code-highlight-row numbered"><div class="code-highlight-line">30 4,12,16 * * * (cd /home/sandip/current/; rake ace:daily_call_statistics RAILS_ENV=production)
+</div></div><div data-line="12" class="code-highlight-row numbered"><div class="code-highlight-line"> </div></div><div data-line="13" class="code-highlight-row numbered"><div class="code-highlight-line"># Rotate sphinx indexes updated evry hour if missed out somehow
+</div></div><div data-line="14" class="code-highlight-row numbered"><div class="code-highlight-line">0 * * * * (cd /user/local/bin/; indexer --rotate --config /home/sandip/current/config/production.sphinx.conf)</div></div></pre></div></figure>
+
+
+        </section>
+        <footer class="post-footer">
+          <section class="share">
+            
+              
+                <a class="icon-twitter" href="http://twitter.com/share?text=Installing+and+running+cronjob+%28crontab+basics%29&amp;url=http://funonrails.com/2011/01/installing-and-running-cronjob-crontab"
+                  onclick="window.open(this.href, 'twitter-share', 'width=550,height=255');return false;">
+                <i class="fa fa-twitter"></i><span class="hidden">twitter</span>
+                </a>
+              
+            
+              
+                <a class="icon-facebook" href="https://www.facebook.com/sharer.php?t=Installing+and+running+cronjob+%28crontab+basics%29&amp;u=http://funonrails.com/2011/01/installing-and-running-cronjob-crontab"
+                  onclick="window.open(this.href, 'facebook-share', 'width=550,height=255');return false;">
+                <i class="fa fa-facebook"></i><span class="hidden">facebook</span>
+                </a>
+              
+            
+              
+            
+          </section>
+        </footer>
+        <div class="bottom-teaser cf">
+          <div class="isLeft">
+            <h5 class="index-headline featured"><span>Written by</span></h5>
+            <section class="author">
+              <div class="author-image" style="background-image: url(/assets/images/author.jpg)">Blog Logo</div>
+              <h4>Sandip Ransing</h4>
+              <p class="bio"></p>
+              <hr>
+              <p class="published">Published <time datetime="2011-01-20 13:50">20 Jan 2011</time></p>
+            </section>
+          </div>
+          
+          <div class="isRight">
+            <h5 class="index-headline featured"><span>Supported by</span></h5>
+            <footer class="site-footer">
+              <section class="poweredby">Proudly published with <a href="http://jekyllrb.com"> Jekyll</a></section>
+              <a class="subscribe" href="/feed.xml"> <span class="tooltip"> <i class="fa fa-rss"></i> You should subscribe to my feed.</span></a>
+              <div class="inner">
+                <section class="copyright">All content copyright <a href="/">Sandip Ransing</a> &copy; 2016<br>All rights reserved.</section>
+              </div>
+            </footer>
+          </div>
+        </div>
+        
+      </article>
+    </main>
+    <div class="bottom-closer">
+      <div class="background-closer-image"  style="background-image: url()">
+        Image
+      </div>
+      <div class="inner">
+        <h1 class="blog-title">Fun On Rails</h1>
+        <h2 class="blog-description">Journal of a Web Developer #ruby #rails #JS 
+</h2>
+        <a href="/" class="btn">Back to Overview</a>
+      </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
+<script type="text/javascript" src="/assets/js/jquery.fitvids.js"></script>
+<script type="text/javascript" src="/assets/js/index.js"></script>
+<script type="text/javascript" src="/assets/js/readingTime.min.js"></script>
+<script>
+(function ($) {
+  "use strict";
+  $(document).ready(function(){
+
+    var $window = $(window),
+    $image = $('.post-image-image, .teaserimage-image');
+    
+      $window.on('scroll', function() {
+        var top = $window.scrollTop();
+
+        if (top < 0 || top > 1500) { return; }
+        $image
+          .css('transform', 'translate3d(0px, '+top/3+'px, 0px)')
+          .css('opacity', 1-Math.max(top/700, 0));
+      });
+      $window.trigger('scroll');
+
+      var height = $('.article-image').height();
+      $('.post-content').css('padding-top', height + 'px');
+
+      $('a[href*=#]:not([href=#])').click(function() {
+        if (location.pathname.replace(/^\//,'') == this.pathname.replace(/^\//,'')
+         && location.hostname == this.hostname) {
+          var target = $(this.hash);
+          target = target.length ? target : $('[name=' + this.hash.slice(1) +']');
+          if (target.length) {
+            $('html,body').animate({ scrollTop: target.offset().top }, 500);
+            return false;
+          }
+        }
+      });
+
+  });
+}(jQuery));
+</script>
+    
+  </body>
+</html>

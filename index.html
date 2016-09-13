@@ -1,28 +1,93 @@
----
-layout: default
----
+<!DOCTYPE html>
+<html>
 
-<div class="teaserimage">
-    <div class="teaserimage-image" {% if site.cover %}style="background-image: url({{ site.cover }})"{% endif %}>
+  <head>
+  <meta charset="utf-8">
+  <!-- (1) Optimize for mobile versions: http://goo.gl/EOpFl -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- (1) force latest IE rendering engine: bit.ly/1c8EiC9 -->
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+  <title>Fun On Rails</title>
+  <meta name="description" content="Journal of a Web Developer #ruby #rails #JS 
+" />
+
+  <meta name="HandheldFriendly" content="True" />
+  <meta name="MobileOptimized" content="320" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:site" content="@sandipransing" />
+    <meta name="twitter:title" content="Fun On Rails" />
+    <meta name="twitter:image" content="http://funonrails.com/assets/images/for_logo.png" />
+    
+    <meta name="twitter:description" content="Journal of a Web Developer #ruby #rails #JS " />
+    
+  
+  
+  <meta property="og:site_name" content="Fun On Rails" />
+  <meta property="og:title" content="Fun On Rails"/>
+  
+  <meta property="og:description" content="Journal of a Web Developer #ruby #rails #JS " />
+  
+  <meta property="og:image" content="http://funonrails.com/assets/images/for_logo.png" />
+  <meta property="og:url" content="http://funonrails.com/" >
+  <meta property="og:type" content="blog" />
+  
+
+  <link rel="canonical" href="http://funonrails.com/"/>
+  <link rel="shortcut icon" href="/assets/images/favicon.png" type="image/png"/>
+  <link rel="stylesheet" href="//brick.a.ssl.fastly.net/Linux+Libertine:400,400i,700,700i/Open+Sans:400,400i,700,700i">
+  <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+
+  <link rel="stylesheet" type="text/css" media="screen" href="/css/main.css" />
+  <link rel="stylesheet" type="text/css" media="print" href="/css/print.css" />
+</head>
+
+  <body>
+
+    <!-- header start -->
+
+<a href="http://funonrails.com" class="logo-readium"><span class="logo" style="background-image: url(/assets/images/for_logo.png)"></span></a>
+
+<!-- header end -->
+
+    <!-- content start -->
+
+    <div class="page-content">
+      <div class="wrapper">
+        <div class="teaserimage">
+    <div class="teaserimage-image" style="background-image: url()">
         Teaser Image
     </div>
 </div>
 
 <header class="blog-header">
-    {% if site.logo %}
-      <a class="blog-logo" href="{{site.url}}" style="background-image: url('{{ site.logo }}')">{{ site.title }}</a>
-    {% endif %}
-    <h1 class="blog-title">{{ site.title }}</h1>
-    <h2 class="blog-description">{{ site.description }}</h2>
+    
+      <a class="blog-logo" href="http://funonrails.com" style="background-image: url('/assets/images/for_logo.png')">Fun On Rails</a>
+    
+    <h1 class="blog-title">Fun On Rails</h1>
+    <h2 class="blog-description">Journal of a Web Developer #ruby #rails #JS 
+</h2>
     <div class="custom-links">
-      {% for social in site.social %}
-        {% if social.url %}
-            <a class="icon-{{ social.icon }}" href="{{ social.url }}" {% if social.desc %} title="{{ social.desc }}"{% endif %}">
-              <i class="fa fa-{{ social.icon }}"></i>
+      
+        
+            <a class="icon-twitter" href="https://twitter.com/sandipransing"  title="Follow me on twitter"">
+              <i class="fa fa-twitter"></i>
             </a>
             &nbsp;&nbsp;·&nbsp;&nbsp;
-        {% endif %}
-      {% endfor %}
+        
+      
+        
+      
+        
+            <a class="icon-github" href="https://github.com/sandipransing"  title="Fork me on github"">
+              <i class="fa fa-github"></i>
+            </a>
+            &nbsp;&nbsp;·&nbsp;&nbsp;
+        
+      
       <a href="/about/">About</a>
     </div>
 </header>
@@ -30,69 +95,258 @@ layout: default
 
 <main class="content" role="main">
 
-    {% if site.tags.featured %}
-    <h5 class="index-headline featured"><span>Featured</span></h5>
-
-    <div class="container featured">
-      {% for post in site.tags.featured %}
-        <article class="post" itemscope itemtype="http://schema.org/BlogPosting" role="article">
-          <div class="article-item">
-            <header class="post-header">
-              <h2 class="post-title" itemprop="name"><a href="{{ post.url }}" itemprop="url">{{ post.title }}</a></h2>
-            </header>
-            <section class="post-excerpt" itemprop="description">
-              <p>{{ post.content | strip_html | truncatewords: 50 }}</p>
-            </section>
-            <div class="post-meta">
-              <time datetime="{{ post.date | date_to_long_string }}">{{ post.date | date_to_long_string }}</time>
-  <!--            <span class="post-tags-set">on {{#foreach tags}}<span class="post-tag-{{slug}}">{{#if @first}}{{else}}, {{/if}}<a href="/tag/{{slug}}">{{name}}</a></span>{{/foreach}}</span>-->
-            </div>
-          </div>
-        </article>
-      {% endfor %}
-    </div>
-
-    <h5 class="index-headline normal"><span>Regular</span></h5>
-    {% endif %}
+    
 
     <div class="cf frame">
-      {% for post in paginator.posts %}
+      
         <article class="post" itemscope itemtype="http://schema.org/BlogPosting" role="article">
           <div class="article-item">
             <header class="post-header">
-              <h2 class="post-title" itemprop="name"><a href="{{ post.url }}" itemprop="url">{{ post.title }}</a></h2>
+              <h2 class="post-title" itemprop="name"><a href="/2014/03/api-authentication-using-devise-token" itemprop="url">Grape API authentication using Devise Auth Token</a></h2>
             </header>
             <section class="post-excerpt" itemprop="description">
-              <p>{{ post.excerpt | strip_html | truncatewords: 50 }}</p>
+              <p>In previous post we saw how to buil RESTful API using Grape. In this post we will see how to add devise auth token to users and how to use it in Grape API authentication. Lets see how this can be done assuming you already have devise setup ready. ##...</p>
             </section>
             <div class="post-meta">
-              <time datetime="{{ post.date | date_to_long_string }}">{{ post.date | date_to_long_string }}</time>
-<!--            <span class="post-tags-set">on {{#foreach tags}}<span class="post-tag-{{slug}}">{{#if @first}}{{else}}, {{/if}}<a href="/tag/{{slug}}">{{name}}</a></span>{{/foreach}}</span>-->
-                {% if site.disqus_short_name and page.comments != false and post.comments != false and site.disqus_show_comment_count == true %}
-                | <a href="{% if index %}{{ root_url }}{{ post.url }}{% endif %}#disqus_thread">Comments</a>
-                {% endif %}
+              <time datetime="27 March 2014">27 March 2014</time>
+<!--            <span class="post-tags-set">on <span class="post-tag-">, <a href="/tag/"></a></span></span>-->
+                
+                | <a href="#disqus_thread">Comments</a>
+                
             </div>
           </div>
         </article>
-      {% endfor %}
+      
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting" role="article">
+          <div class="article-item">
+            <header class="post-header">
+              <h2 class="post-title" itemprop="name"><a href="/2014/03/building-restful-api-using-grape-in-rails" itemprop="url">Building RESTful API using Grape in Rails</a></h2>
+            </header>
+            <section class="post-excerpt" itemprop="description">
+              <p>While developing a rich client side web application or mobile app, we need RESTful JSON API which interacts with the front-end javascript framework. Here you may use backbone.js, ember.js or angular.js on the front-end side of application. Here we’ll be using Ruby on Rails on the back-end which will serve...</p>
+            </section>
+            <div class="post-meta">
+              <time datetime="26 March 2014">26 March 2014</time>
+<!--            <span class="post-tags-set">on <span class="post-tag-">, <a href="/tag/"></a></span></span>-->
+                
+                | <a href="#disqus_thread">Comments</a>
+                
+            </div>
+          </div>
+        </article>
+      
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting" role="article">
+          <div class="article-item">
+            <header class="post-header">
+              <h2 class="post-title" itemprop="name"><a href="/2014/03/understanding-restful-vs-soap-web-services" itemprop="url">Understanding RESTful vs SOAP web services</a></h2>
+            </header>
+            <section class="post-excerpt" itemprop="description">
+              <p>A Web service is a method of communications between two electronic devices over the World Wide Web. It is also defined as a software system designed to support interoperable machine-to-machine interaction over a network. In simple words, “Web services are developed to use by other software applications” Web services communicate...</p>
+            </section>
+            <div class="post-meta">
+              <time datetime="17 March 2014">17 March 2014</time>
+<!--            <span class="post-tags-set">on <span class="post-tag-">, <a href="/tag/"></a></span></span>-->
+                
+            </div>
+          </div>
+        </article>
+      
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting" role="article">
+          <div class="article-item">
+            <header class="post-header">
+              <h2 class="post-title" itemprop="name"><a href="/2014/02/moving-from-blogspot-to-octopress" itemprop="url">Migrating from blogspot to octopress</a></h2>
+            </header>
+            <section class="post-excerpt" itemprop="description">
+              <p>I was happily writing my blog at blogspot almost three plus years. From last 2-3 days, i was evaluating with octopress for its way of writing posts, customizations, themes, and plugins. As a result of evaluation, found octopress blog as very quick &amp; easy to write hence decided to shift...</p>
+            </section>
+            <div class="post-meta">
+              <time datetime="09 February 2014">09 February 2014</time>
+<!--            <span class="post-tags-set">on <span class="post-tag-">, <a href="/tag/"></a></span></span>-->
+                
+                | <a href="#disqus_thread">Comments</a>
+                
+            </div>
+          </div>
+        </article>
+      
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting" role="article">
+          <div class="article-item">
+            <header class="post-header">
+              <h2 class="post-title" itemprop="name"><a href="/2014/02/writing-octopress-blog-posts-using-markdown" itemprop="url">Writing Octopress blog posts using markdown</a></h2>
+            </header>
+            <section class="post-excerpt" itemprop="description">
+              <p>This is an example post which shows various markdown syntax that can be used while writing octopress markdown posts.
+## Bold text
+Hello Octopress!
+
+Blockquote
+Don’t stop when you’re tired, stop when you’re done.@TheJeetBanerjee
+
+</p>
+            </section>
+            <div class="post-meta">
+              <time datetime="07 February 2014">07 February 2014</time>
+<!--            <span class="post-tags-set">on <span class="post-tag-">, <a href="/tag/"></a></span></span>-->
+                
+            </div>
+          </div>
+        </article>
+      
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting" role="article">
+          <div class="article-item">
+            <header class="post-header">
+              <h2 class="post-title" itemprop="name"><a href="/2014/02/octopress-powered-and-github-hosted-blog" itemprop="url">Getting started: Octopress powered and Github hosted blog</a></h2>
+            </header>
+            <section class="post-excerpt" itemprop="description">
+              <p>There are various blogging sites like blogspot, wordpress, posterous, and many more. Each has their own pros and cons and none of the engine gives us full power of ehhance our blogging experience. Anyone who has atleast some technical knowledge can start with octopress powered blog. This gives us the...</p>
+            </section>
+            <div class="post-meta">
+              <time datetime="07 February 2014">07 February 2014</time>
+<!--            <span class="post-tags-set">on <span class="post-tag-">, <a href="/tag/"></a></span></span>-->
+                
+            </div>
+          </div>
+        </article>
+      
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting" role="article">
+          <div class="article-item">
+            <header class="post-header">
+              <h2 class="post-title" itemprop="name"><a href="/2013/03/what-is-new-in-rails-3" itemprop="url">what is new in rails 3</a></h2>
+            </header>
+            <section class="post-excerpt" itemprop="description">
+              <p>Rails 3 has released with various notable features and said that it’s one of the best version rails community has released so far. Highlights of major features: 1. Brand new router with an emphasis on RESTful declarations 2. New Action Mailer API modeled after Action Controller 3. New Active Record...</p>
+            </section>
+            <div class="post-meta">
+              <time datetime="17 March 2013">17 March 2013</time>
+<!--            <span class="post-tags-set">on <span class="post-tag-">, <a href="/tag/"></a></span></span>-->
+                
+                | <a href="#disqus_thread">Comments</a>
+                
+            </div>
+          </div>
+        </article>
+      
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting" role="article">
+          <div class="article-item">
+            <header class="post-header">
+              <h2 class="post-title" itemprop="name"><a href="/2012/10/dynamic-conditions-to-rails-associations" itemprop="url">Dynamic conditions to rails associations</a></h2>
+            </header>
+            <section class="post-excerpt" itemprop="description">
+              <p>We all know that rails models associations gets defined while class definitions are loaded and once defined can’t be changed. But still you can make use of block parameter to conditions to have dynamic query conditions inside associations. Below line explains how to define dynamic associations : ruby has_one :code_sequence,...</p>
+            </section>
+            <div class="post-meta">
+              <time datetime="25 October 2012">25 October 2012</time>
+<!--            <span class="post-tags-set">on <span class="post-tag-">, <a href="/tag/"></a></span></span>-->
+                
+            </div>
+          </div>
+        </article>
+      
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting" role="article">
+          <div class="article-item">
+            <header class="post-header">
+              <h2 class="post-title" itemprop="name"><a href="/2012/04/upgrading-from-rails-2-1-x-to-rails-2-3-11" itemprop="url">Upgrading from Rails 2.1.x to Rails 2.3.11</a></h2>
+            </header>
+            <section class="post-excerpt" itemprop="description">
+              <p>If your application is currently on any version of Rails 2.1.x, Then following changes needs to be done for upgrading your application to Rails 2.3.11 1. First install Rails version 2.3.11 gem install rails -v2.3.11 2. Freeze app ruby gems rake rails:freeze:gems Hopefully it should work for you but it...</p>
+            </section>
+            <div class="post-meta">
+              <time datetime="04 April 2012">04 April 2012</time>
+<!--            <span class="post-tags-set">on <span class="post-tag-">, <a href="/tag/"></a></span></span>-->
+                
+            </div>
+          </div>
+        </article>
+      
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting" role="article">
+          <div class="article-item">
+            <header class="post-header">
+              <h2 class="post-title" itemprop="name"><a href="/2012/02/ruby-enumerable-toproc-ampersond-colon" itemprop="url">ruby enumerable & to_proc (ampersond & symbol shortcut)</a></h2>
+            </header>
+            <section class="post-excerpt" itemprop="description">
+              <p>Basically Enumerable mixin gives collection classes a variety of traverse, search, sort methods. Understanding ruby blocks Blocks are statements of code written in ruby. one can take them as similar to c language macro’s Different ways to define blocks ```ruby a = proc do puts “hello” end a.call #=&gt; hello...</p>
+            </section>
+            <div class="post-meta">
+              <time datetime="23 February 2012">23 February 2012</time>
+<!--            <span class="post-tags-set">on <span class="post-tag-">, <a href="/tag/"></a></span></span>-->
+                
+            </div>
+          </div>
+        </article>
+      
     </div>
 
     <nav class="pagination" role="navigation">
-      {% if paginator.next_page %}
-        <a class="newer-posts" href="/page{{paginator.next_page}}">&larr; Older posts</a>
-      {% endif %}
-      <span class="page-number">Page {{ paginator.page }} of {{ paginator.total_pages }}</span>
-      {% if paginator.previous_page %}
-        {% if paginator.page == 2 %}
-          <a class="older-posts" href="/">Newer posts &rarr;</a>
-        {% else %}
-          <a class="older-posts" href="/page{{paginator.previous_page}}">Newer posts &rarr;</a>
-        {% endif %}
-      {% endif %}
+      
+        <a class="newer-posts" href="/page2">&larr; Older posts</a>
+      
+      <span class="page-number">Page 1 of 15</span>
+      
     </nav>
 
 
-    <!-- {{!! After all the posts, we have the previous/next pagination links }}
-    {{pagination}} -->
+    <!-- 
+     -->
 
 </main>
+
+      </div>
+    </div>
+
+    <!-- content end -->
+
+    <!-- footer start -->
+
+<footer class="site-footer">
+  <a class="subscribe" href="/feed.xml"> <span class="tooltip"> <i class="fa fa-rss"></i> Subscribe!</span></a>
+    <div class="inner">
+         <section class="copyright">All content copyright <a href="mailto:sandip@funonrails.com">Sandip Ransing</a> &copy; 2016 &bull; All rights reserved.</section>
+         <section class="poweredby">Made with <a href="http://jekyllrb.com"> Jekyll</a></section>
+    </div>
+</footer>
+
+<!-- footer end -->
+    <script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
+<script type="text/javascript" src="/assets/js/jquery.fitvids.js"></script>
+<script type="text/javascript" src="/assets/js/index.js"></script>
+<script type="text/javascript" src="/assets/js/readingTime.min.js"></script>
+<script>
+(function ($) {
+  "use strict";
+  $(document).ready(function(){
+
+    var $window = $(window),
+    $image = $('.post-image-image, .teaserimage-image');
+    
+      $window.on('scroll', function() {
+        var top = $window.scrollTop();
+
+        if (top < 0 || top > 1500) { return; }
+        $image
+          .css('transform', 'translate3d(0px, '+top/3+'px, 0px)')
+          .css('opacity', 1-Math.max(top/700, 0));
+      });
+      $window.trigger('scroll');
+
+      var height = $('.article-image').height();
+      $('.post-content').css('padding-top', height + 'px');
+
+      $('a[href*=#]:not([href=#])').click(function() {
+        if (location.pathname.replace(/^\//,'') == this.pathname.replace(/^\//,'')
+         && location.hostname == this.hostname) {
+          var target = $(this.hash);
+          target = target.length ? target : $('[name=' + this.hash.slice(1) +']');
+          if (target.length) {
+            $('html,body').animate({ scrollTop: target.offset().top }, 500);
+            return false;
+          }
+        }
+      });
+
+  });
+}(jQuery));
+</script>
+
+  </body>
+
+</html>

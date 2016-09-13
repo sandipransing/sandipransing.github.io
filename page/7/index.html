@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+  <meta charset="utf-8">
+  <!-- (1) Optimize for mobile versions: http://goo.gl/EOpFl -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- (1) force latest IE rendering engine: bit.ly/1c8EiC9 -->
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+  <title>Fun On Rails</title>
+  <meta name="description" content="Journal of a Web Developer #ruby #rails #JS 
+" />
+
+  <meta name="HandheldFriendly" content="True" />
+  <meta name="MobileOptimized" content="320" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:site" content="@sandipransing" />
+    <meta name="twitter:title" content="Fun On Rails" />
+    <meta name="twitter:image" content="http://funonrails.com/assets/images/for_logo.png" />
+    
+    <meta name="twitter:description" content="Journal of a Web Developer #ruby #rails #JS " />
+    
+  
+  
+  <meta property="og:site_name" content="Fun On Rails" />
+  <meta property="og:title" content="Fun On Rails"/>
+  
+  <meta property="og:description" content="Journal of a Web Developer #ruby #rails #JS " />
+  
+  <meta property="og:image" content="http://funonrails.com/assets/images/for_logo.png" />
+  <meta property="og:url" content="http://funonrails.com/page/7/" >
+  <meta property="og:type" content="blog" />
+  
+
+  <link rel="canonical" href="http://funonrails.com/page/7/"/>
+  <link rel="shortcut icon" href="/assets/images/favicon.png" type="image/png"/>
+  <link rel="stylesheet" href="//brick.a.ssl.fastly.net/Linux+Libertine:400,400i,700,700i/Open+Sans:400,400i,700,700i">
+  <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+
+  <link rel="stylesheet" type="text/css" media="screen" href="/css/main.css" />
+  <link rel="stylesheet" type="text/css" media="print" href="/css/print.css" />
+</head>
+
+  <body>
+
+    <!-- header start -->
+
+<a href="http://funonrails.com" class="logo-readium"><span class="logo" style="background-image: url(/assets/images/for_logo.png)"></span></a>
+
+<!-- header end -->
+
+    <!-- content start -->
+
+    <div class="page-content">
+      <div class="wrapper">
+        <div class="teaserimage">
+    <div class="teaserimage-image" style="background-image: url()">
+        Teaser Image
+    </div>
+</div>
+
+<header class="blog-header">
+    
+      <a class="blog-logo" href="http://funonrails.com" style="background-image: url('/assets/images/for_logo.png')">Fun On Rails</a>
+    
+    <h1 class="blog-title">Fun On Rails</h1>
+    <h2 class="blog-description">Journal of a Web Developer #ruby #rails #JS 
+</h2>
+    <div class="custom-links">
+      
+        
+            <a class="icon-twitter" href="https://twitter.com/sandipransing"  title="Follow me on twitter"">
+              <i class="fa fa-twitter"></i>
+            </a>
+            &nbsp;&nbsp;·&nbsp;&nbsp;
+        
+      
+        
+      
+        
+            <a class="icon-github" href="https://github.com/sandipransing"  title="Fork me on github"">
+              <i class="fa fa-github"></i>
+            </a>
+            &nbsp;&nbsp;·&nbsp;&nbsp;
+        
+      
+      <a href="/about/">About</a>
+    </div>
+</header>
+
+
+<main class="content" role="main">
+
+    
+
+    <div class="cf frame">
+      
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting" role="article">
+          <div class="article-item">
+            <header class="post-header">
+              <h2 class="post-title" itemprop="name"><a href="/2010/10/delayed-jobs-fancy-methods" itemprop="url">DelayedJOb's (DJ) fancy methods</a></h2>
+            </header>
+            <section class="post-excerpt" itemprop="description">
+              <p>Delayed Job provides send_later and send_at as instance as well as class methods. It also gives us handle_asynchronously as class method to be written inside class. ```ruby module Delayed module MessageSending def send_later(method, *args) Delayed::Job.enqueue Delayed::PerformableMethod.new(self, method.to_sy m, args) end def send_at(time, method, *args) Delayed::Job.enqueue(Delayed::PerformableMethod.new(self, method.to_sy m, args), 0, time)...</p>
+            </section>
+            <div class="post-meta">
+              <time datetime="06 October 2010">06 October 2010</time>
+<!--            <span class="post-tags-set">on <span class="post-tag-">, <a href="/tag/"></a></span></span>-->
+                
+            </div>
+          </div>
+        </article>
+      
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting" role="article">
+          <div class="article-item">
+            <header class="post-header">
+              <h2 class="post-title" itemprop="name"><a href="/2010/10/solution-to-delayed-job-gem-server-start-problem" itemprop="url">Solution to DelayedJob(DJ) gem server start problem</a></h2>
+            </header>
+            <section class="post-excerpt" itemprop="description">
+              <p>Solution to DelayedJob(DJ) gem server start problem I had installed delayed_job gem 2.0.3, daemons gem but after staring DJ server it shows daemon started but actually process gets killed automatically. I performed steps given by Kevin on google group and it worked like charm Here are the steps: ## 1...</p>
+            </section>
+            <div class="post-meta">
+              <time datetime="05 October 2010">05 October 2010</time>
+<!--            <span class="post-tags-set">on <span class="post-tag-">, <a href="/tag/"></a></span></span>-->
+                
+            </div>
+          </div>
+        </article>
+      
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting" role="article">
+          <div class="article-item">
+            <header class="post-header">
+              <h2 class="post-title" itemprop="name"><a href="/2010/10/introduction-to-delayed-job" itemprop="url">Introduction To Delayed Job</a></h2>
+            </header>
+            <section class="post-excerpt" itemprop="description">
+              <p>Check out this SlideShare Presentation: 
+
+Introduction To Delayed Job
+
+
+
+
+
+
+&lt;/embed&gt;
+
+&lt;div style="padding:5px 0 12px"&gt;View more presentations from Jonathan Julian.&lt;/div&gt;
+
+</p>
+            </section>
+            <div class="post-meta">
+              <time datetime="04 October 2010">04 October 2010</time>
+<!--            <span class="post-tags-set">on <span class="post-tag-">, <a href="/tag/"></a></span></span>-->
+                
+            </div>
+          </div>
+        </article>
+      
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting" role="article">
+          <div class="article-item">
+            <header class="post-header">
+              <h2 class="post-title" itemprop="name"><a href="/2010/09/best-ways-to-populate-dynamic-array-in-ruby" itemprop="url">Best ways to populate dynamic array of numbers in ruby</a></h2>
+            </header>
+            <section class="post-excerpt" itemprop="description">
+              <p>Array of years using range ((yr=Date.current.year)-9..yr).to_a #=&gt; [2001, 2002, 2003, 2004, 2005, 2006, 2007, 2008, 2009, 2010] Array of years using lambda Array.new(10){|i| Date.current.year-i} #=&gt; [2010, 2009, 2008, 2007, 2006, 2005, 2004, 2003, 2002, 2001] Array of months Date::MONTHNAMES.compact #=&gt; ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October",...</p>
+            </section>
+            <div class="post-meta">
+              <time datetime="29 September 2010">29 September 2010</time>
+<!--            <span class="post-tags-set">on <span class="post-tag-">, <a href="/tag/"></a></span></span>-->
+                
+            </div>
+          </div>
+        </article>
+      
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting" role="article">
+          <div class="article-item">
+            <header class="post-header">
+              <h2 class="post-title" itemprop="name"><a href="/2010/09/rails-3-beautiful-code" itemprop="url">Rails 3 Beautiful Code</a></h2>
+            </header>
+            <section class="post-excerpt" itemprop="description">
+              <p>Check out this SlideShare Presentation: &lt;div style="width:825px" id="__ss_3219240"&gt;Rails 3 Beautiful Code&lt;/embed&gt;&lt;div style="padding:5px 0 12px"&gt;View more presentations from GreggPollack.&lt;/div&gt;&lt;/div&gt;
+
+</p>
+            </section>
+            <div class="post-meta">
+              <time datetime="09 September 2010">09 September 2010</time>
+<!--            <span class="post-tags-set">on <span class="post-tag-">, <a href="/tag/"></a></span></span>-->
+                
+            </div>
+          </div>
+        </article>
+      
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting" role="article">
+          <div class="article-item">
+            <header class="post-header">
+              <h2 class="post-title" itemprop="name"><a href="/2010/08/zipcode-validation-using-geokit-in-rails" itemprop="url">Zipcode validation using geokit in rails</a></h2>
+            </header>
+            <section class="post-excerpt" itemprop="description">
+              <p>Install geokit gem gem install geokit OR ruby # Add following line inside rails initialize block Rails::Initializer.run do |config| config.gem 'geokit' end And then run command rake gems:install Consider User model with zipcode as attribute field ```ruby include Geokit::Geocoders class User &lt; ActiveRecord::Base set_table_name :users validate_presence_of :zipcode validate :request_zipcode_validation_using_geokit, :if...</p>
+            </section>
+            <div class="post-meta">
+              <time datetime="21 August 2010">21 August 2010</time>
+<!--            <span class="post-tags-set">on <span class="post-tag-">, <a href="/tag/"></a></span></span>-->
+                
+            </div>
+          </div>
+        </article>
+      
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting" role="article">
+          <div class="article-item">
+            <header class="post-header">
+              <h2 class="post-title" itemprop="name"><a href="/2010/08/actionmailer-smtp-settings-in-rails" itemprop="url">ActionMailer SMTP settings in rails</a></h2>
+            </header>
+            <section class="post-excerpt" itemprop="description">
+              <p>1. Add following line to rails environment file ruby ActionMailer::Base.delivery_method = :smtp 2. Include your email authentication Create a ruby file called smtp_settings under config/initializers directory ruby # config/initializers/smtp_settings.rb ActionMailer::Base.smtp_settings = { :address =&gt; "smtp.gmail.com", :port =&gt; 587, :authentication =&gt; :plain, :enable_starttls_auto =&gt; true, :user_name =&gt; "replies@gmail.com", :password =&gt; "_my_gmail_password_"...</p>
+            </section>
+            <div class="post-meta">
+              <time datetime="21 August 2010">21 August 2010</time>
+<!--            <span class="post-tags-set">on <span class="post-tag-">, <a href="/tag/"></a></span></span>-->
+                
+            </div>
+          </div>
+        </article>
+      
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting" role="article">
+          <div class="article-item">
+            <header class="post-header">
+              <h2 class="post-title" itemprop="name"><a href="/2010/08/email-attachments-in-ruby-rails" itemprop="url">Email attachments in ruby & rails</a></h2>
+            </header>
+            <section class="post-excerpt" itemprop="description">
+              <p>1. Add ActionMailer configuration in environment This configuration can be different for development and production. ```ruby # Include your application configuration below # You can set two configurations sendmail as well as smtp # To use SMTP you need to provide your email account credentials # Sendmail is a unix...</p>
+            </section>
+            <div class="post-meta">
+              <time datetime="21 August 2010">21 August 2010</time>
+<!--            <span class="post-tags-set">on <span class="post-tag-">, <a href="/tag/"></a></span></span>-->
+                
+            </div>
+          </div>
+        </article>
+      
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting" role="article">
+          <div class="article-item">
+            <header class="post-header">
+              <h2 class="post-title" itemprop="name"><a href="/2010/08/multiple-sites-hosting-using-radiant" itemprop="url">Multiple sites hosting using radiant cms</a></h2>
+            </header>
+            <section class="post-excerpt" itemprop="description">
+              <p>This involves 4-5 simple in-order to get multiple sites working using radiant cms. Follow the below steps one by one. #### Setup radiant cms first Install radiant gem sudo gem install radiant set ‘radiant’ under path export PATH=$PATH:/var/lib/gems/1.8/gems/radiant-0.8.0/bin Now, As we are done with radiant installation lets create new project....</p>
+            </section>
+            <div class="post-meta">
+              <time datetime="07 August 2010">07 August 2010</time>
+<!--            <span class="post-tags-set">on <span class="post-tag-">, <a href="/tag/"></a></span></span>-->
+                
+            </div>
+          </div>
+        </article>
+      
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting" role="article">
+          <div class="article-item">
+            <header class="post-header">
+              <h2 class="post-title" itemprop="name"><a href="/2010/08/spell-check-in-ruby-and-rails-using" itemprop="url">Spell Check in ruby and rails using BOSSMan</a></h2>
+            </header>
+            <section class="post-excerpt" itemprop="description">
+              <p>Wrong English is an often problem while developing any website product as it gives bad view to website user and thus does direct impact on product. BOSSMan is a ruby gem that interacts with yahoo web service and provides a simplest way to overcome such errors. Installation: gem sources -a...</p>
+            </section>
+            <div class="post-meta">
+              <time datetime="04 August 2010">04 August 2010</time>
+<!--            <span class="post-tags-set">on <span class="post-tag-">, <a href="/tag/"></a></span></span>-->
+                
+            </div>
+          </div>
+        </article>
+      
+    </div>
+
+    <nav class="pagination" role="navigation">
+      
+        <a class="newer-posts" href="/page8">&larr; Older posts</a>
+      
+      <span class="page-number">Page 7 of 15</span>
+      
+        
+          <a class="older-posts" href="/page6">Newer posts &rarr;</a>
+        
+      
+    </nav>
+
+
+    <!-- 
+     -->
+
+</main>
+
+      </div>
+    </div>
+
+    <!-- content end -->
+
+    <!-- footer start -->
+
+<footer class="site-footer">
+  <a class="subscribe" href="/feed.xml"> <span class="tooltip"> <i class="fa fa-rss"></i> Subscribe!</span></a>
+    <div class="inner">
+         <section class="copyright">All content copyright <a href="mailto:sandip@funonrails.com">Sandip Ransing</a> &copy; 2016 &bull; All rights reserved.</section>
+         <section class="poweredby">Made with <a href="http://jekyllrb.com"> Jekyll</a></section>
+    </div>
+</footer>
+
+<!-- footer end -->
+    <script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
+<script type="text/javascript" src="/assets/js/jquery.fitvids.js"></script>
+<script type="text/javascript" src="/assets/js/index.js"></script>
+<script type="text/javascript" src="/assets/js/readingTime.min.js"></script>
+<script>
+(function ($) {
+  "use strict";
+  $(document).ready(function(){
+
+    var $window = $(window),
+    $image = $('.post-image-image, .teaserimage-image');
+    
+      $window.on('scroll', function() {
+        var top = $window.scrollTop();
+
+        if (top < 0 || top > 1500) { return; }
+        $image
+          .css('transform', 'translate3d(0px, '+top/3+'px, 0px)')
+          .css('opacity', 1-Math.max(top/700, 0));
+      });
+      $window.trigger('scroll');
+
+      var height = $('.article-image').height();
+      $('.post-content').css('padding-top', height + 'px');
+
+      $('a[href*=#]:not([href=#])').click(function() {
+        if (location.pathname.replace(/^\//,'') == this.pathname.replace(/^\//,'')
+         && location.hostname == this.hostname) {
+          var target = $(this.hash);
+          target = target.length ? target : $('[name=' + this.hash.slice(1) +']');
+          if (target.length) {
+            $('html,body').animate({ scrollTop: target.offset().top }, 500);
+            return false;
+          }
+        }
+      });
+
+  });
+}(jQuery));
+</script>
+
+  </body>
+
+</html>
