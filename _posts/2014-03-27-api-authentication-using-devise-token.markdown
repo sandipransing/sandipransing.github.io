@@ -10,6 +10,7 @@ In [previous post](http://funonrails.com/2014/03/building-restful-api-using-grap
 Lets see how this can be done assuming you already have devise setup ready.
 ## Add *token_authenticable* to devise modules (works with devise versions <=3.2)
 In *user.rb* add *:token_authenticatable* to the list of devise modules, it should look something like below:
+
 ```ruby
 class User < ActiveRecord::Base
 # ..code..
@@ -28,8 +29,10 @@ class User < ActiveRecord::Base
 # ..code..
 end
 ```
+
 <!-- more -->
 ## Generate Authentication token on your own (If devise version > 3.2)
+
 ```
 class User < ActiveRecord::Base
 # ..code..
@@ -58,7 +61,9 @@ class User < ActiveRecord::Base
     end
   end
 ```
+
 ## Add migration for authentiction token
+
 ```
 rails g migration add_auth_token_to_users
       invoke  active_record
@@ -81,21 +86,27 @@ class AddAuthTokenToUsers < ActiveRecord::Migration
   end
 end
 ```
+
 #### Run migrations
+
 ```
 rake db:migrate
 ```
+
 #### Generate token for existing users
 We need to call save on every instance of user that will ensure authentication token is present for each user.
+
 ```
 User.all.each(&:save)
 ```
+
 #### Secure Grape API using auth token
 You need to add below code to the *API::Root* in-order to add token based authentication. If you are unware of *API::Root* then please read [Building RESTful API using Grape](http://funonrails.com/2014/03/building-restful-api-using-grape-in-rails/)
 
 In below example, We are authenticating user based on two scenarios
 - If user is logged on to the web app then use the same session
 - If session is not available and *auth token* is passed then find user based on the token
+
 ```ruby
 # lib/api/root.rb
 module API
